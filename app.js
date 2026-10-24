@@ -406,6 +406,7 @@ function initAudio() {
   let userPaused = false;
   let fadeAnimId = null;
   let voiceOn = false; // a quote's voice clip is playing: music ducks to 20%
+  const gestureEvents = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
 
   // Target volume from the current state: cinema dims it, a quote's voice ducks it
   function retarget(ms) {
@@ -465,6 +466,7 @@ function initAudio() {
     if (p !== undefined) {
       p.then(() => {
         retarget(FADE_IN_MS);
+        gestureEvents.forEach((ev) => window.removeEventListener(ev, onFirstGesture, { capture: true }));
       }).catch(() => {
         // Autoplay blocked by browser policy without user gesture
         isPlaying = false;
@@ -494,13 +496,10 @@ function initAudio() {
   // Immediate autoplay attempt
   play();
 
-  // If autoplay is blocked by browser, trigger immediately on the very first gesture (scroll, click, tap, key)
-  const gestureEvents = ['pointerdown', 'touchstart', 'click', 'wheel', 'keydown', 'scroll'];
+  // Autoplay blocked: retry on a gesture the browser accepts (scroll/wheel/touchstart don't count),
+  // and keep listening until play() actually succeeds
   function onFirstGesture() {
-    if (!isPlaying && !userPaused) {
-      play();
-    }
-    gestureEvents.forEach((ev) => window.removeEventListener(ev, onFirstGesture, { capture: true }));
+    if (!isPlaying && !userPaused) play();
   }
   gestureEvents.forEach((ev) => window.addEventListener(ev, onFirstGesture, { capture: true, passive: true }));
 
