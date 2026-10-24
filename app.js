@@ -416,30 +416,33 @@ function initAudio() {
   document.addEventListener('voice', (e) => {
     if (voiceOn === e.detail) return;
     voiceOn = e.detail;
-    if (isPlaying) retarget(voiceOn ? 400 : 1200);
+    if (!isPlaying) return;
+    if (volumeLocked) voiceOn ? audio.pause() : audio.play().catch(() => {});
+    else retarget(voiceOn ? 400 : 1200);
   });
 
+  // iOS Safari ignores audio.volume (always 1): there the music pauses under a voice clip instead of ducking
+  audio.volume = 0.5;
+  const volumeLocked = audio.volume !== 0.5;
+  audio.volume = 1;
+
+  // Timer, not rAF: rAF stalls in background tabs and would leave the music stuck at volume 0
   function setVolumeSmooth(target, duration, onComplete) {
-    if (fadeAnimId) cancelAnimationFrame(fadeAnimId);
+    if (fadeAnimId) clearInterval(fadeAnimId);
     const startVol = audio.volume;
     const startTime = performance.now();
 
-    function step(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(1, elapsed / duration);
+    fadeAnimId = setInterval(() => {
+      const progress = Math.min(1, (performance.now() - startTime) / duration);
       // Cosine easing for natural acoustic perceived loudness
       const eased = 0.5 * (1 - Math.cos(Math.PI * progress));
       audio.volume = Math.max(0, Math.min(1, startVol + (target - startVol) * eased));
-
-      if (progress < 1) {
-        fadeAnimId = requestAnimationFrame(step);
-      } else {
-        fadeAnimId = null;
-        audio.volume = target;
-        if (onComplete) onComplete();
-      }
-    }
-    fadeAnimId = requestAnimationFrame(step);
+      if (progress < 1) return;
+      clearInterval(fadeAnimId);
+      fadeAnimId = null;
+      audio.volume = target;
+      if (onComplete) onComplete();
+    }, 30);
   }
 
   // Only seek/clamp if playing the uncropped full original track (duration > 200s)
@@ -498,7 +501,9 @@ function initAudio() {
 
   // Autoplay blocked: retry on a gesture the browser accepts (scroll/wheel/touchstart don't count),
   // and keep listening until play() actually succeeds
-  function onFirstGesture() {
+  function onFirstGesture(e) {
+    // The music button handles its own click; starting here too made that click start then pause the music
+    if (btn.contains(e.target)) return;
     if (!isPlaying && !userPaused) play();
   }
   gestureEvents.forEach((ev) => window.addEventListener(ev, onFirstGesture, { capture: true, passive: true }));
