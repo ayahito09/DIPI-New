@@ -1,0 +1,663 @@
+/* ==========================================================================
+   RONA MASA · KEMBALI MENGINGAT KENANGAN
+   Nocturne design system (dark): warm ink ground, ivory text, one lime accent.
+   Instrument Serif display × Geist text.
+   ========================================================================== */
+
+:root {
+  --bg: #0B0B0C;
+  --surface: #131315;
+  --raised: #1B1B1E;
+  --text: #F3F1EC;
+  --muted: #8E8C86;
+  --accent: #D6FF4D;
+  --accent-ink: #10130A;
+  /* Sub-primary: Segel Merah. Fill only (2.9:1 on Ink fails as text); pair with Ivory text (6.9:1) */
+  --secondary: #BC0202;
+  --secondary-hover: #D41414;
+  --ember: #FF8A5B;
+  --iris: #A394FF;
+  /* Rona Masa palette: Rerumputan Sore, Segel Surat, Kertas Buku Harian, Tinta Mesin Ketik */
+  --green: #76C457;
+  --paper: #F9F6F0;
+  --polaroid: #EFECE6;
+  --ink: #2C2623;
+  --line: rgba(255, 255, 255, .09);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Geist', system-ui, sans-serif;
+  --mono: 'Geist', ui-monospace, monospace; /* taste-skill-ignore */
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 24px;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --dur: 500ms;
+
+  --margin: clamp(1rem, 4vw, 3rem);
+  --gap-section: clamp(6rem, 14vh, 10rem);
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); scroll-behavior: smooth; scroll-snap-type: y proximity; }
+/* ==========================================================================
+   SECTION DECK (JS adds html.deck when every section fits the screen)
+   All sections are pinned fullscreen; only .is-current shows. The incoming
+   section plays the entrance named by its data-fx, the outgoing one recedes.
+   ========================================================================== */
+html.deck { overflow: hidden; scroll-snap-type: none; scroll-behavior: auto; }
+html.deck .panel {
+  position: fixed;
+  inset: 0;
+  min-height: 0;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  justify-content: safe center;
+  visibility: hidden;
+  z-index: 1;
+}
+html.deck .panel::-webkit-scrollbar { display: none; }
+html.deck .is-current { visibility: visible; z-index: 2; }
+html.deck .is-leaving { visibility: visible; z-index: 1; animation: recede 1100ms var(--ease) forwards; }
+@keyframes recede { to { scale: 0.92; opacity: 0.35; filter: blur(6px); } }
+
+/* Hero: the name comes back as the whole scene settles from close up */
+.fx-zoom { animation: fx-zoom 1100ms var(--ease) both; }
+@keyframes fx-zoom { from { scale: 1.25; opacity: 0; filter: blur(12px); } }
+/* Kutipan: a circle of paper opens from the centre */
+.fx-circle { animation: fx-circle 1100ms var(--ease) both; }
+@keyframes fx-circle { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(75% at 50% 50%); } }
+/* Bioskop: the red curtain parts from the middle */
+.fx-curtain { animation: fx-curtain 1100ms var(--ease) both; }
+@keyframes fx-curtain { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
+/* Penutup: the closing card slides up over the cinema */
+.fx-rise { animation: fx-rise 1100ms var(--ease) both; }
+@keyframes fx-rise { from { translate: 0 100%; } }
+
+.progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 950; background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--r-sm); }
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accent)); font-weight: 400; }
+
+.wrap { width: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--margin); }
+
+.label {
+  font-family: var(--mono); /* taste-skill-ignore */
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* --- Buttons & chips --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.btn span { transition: transform var(--dur) var(--ease); }
+.btn:hover span { transform: translateX(4px); }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: var(--text); }
+.btn-secondary { background: var(--secondary); color: var(--text); }
+.btn-secondary:hover { background: var(--secondary-hover); }
+.btn-ghost { background: var(--raised); color: var(--text); }
+.btn-ghost:hover { background: var(--text); color: var(--bg); }
+
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 40px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  background: var(--raised);
+  font-size: 0.875rem;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.audio-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.eq i { width: 3px; height: 4px; background: currentColor; border-radius: 1px; }
+.audio-btn[aria-pressed="true"] .eq i { animation: eq 900ms var(--ease) infinite alternate; }
+.audio-btn[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: 150ms; }
+.audio-btn[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: 300ms; }
+@keyframes eq { to { height: 12px; } }
+
+.audio-btn--floating {
+  position: fixed;
+  bottom: 1.5rem;
+  right: var(--margin);
+  z-index: 800;
+  background: var(--raised);
+}
+
+@media (max-width: 640px) {
+  .audio-label { display: none; }
+}
+
+/* --- Panels --- */
+.panel {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(2.5rem, 5vh, 4rem);
+  scroll-snap-align: start;
+}
+
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+.sec-num {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+.sec-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 1.6rem + 4vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 6vh, 4.5rem) 0;
+  overflow: hidden;
+}
+/* --tx/--ty (-1..1) follow the pointer (JS): photo drifts against it for depth */
+.hero-bg {
+  position: absolute;
+  inset: -40px;
+  background: url('assets/images/AS.jpg') center / cover no-repeat;
+  transform: translate(calc(var(--tx, 0) * -24px), calc(var(--ty, 0) * -24px)) scale(calc(1.06 + var(--hp, 0) * 0.1));
+  transition: transform 1200ms var(--ease);
+}
+/* Neutral scrim keeps ivory text readable over the photo */
+.hero-bg::after { content: ''; position: absolute; inset: 0; background: rgba(11, 11, 12, 0.78); }
+/* Cursor spotlight: reveals the photo where the pointer is (--mx/--my set in JS) */
+.hero-spot {
+  position: absolute;
+  inset: 0;
+  background: url('assets/images/AS.jpg') center / cover no-repeat;
+  transform: scale(1.06);
+  transition: opacity 600ms var(--ease);
+  -webkit-mask-image: radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 100%); /* taste-skill-ignore */
+  mask-image: radial-gradient(circle 280px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 100%); /* taste-skill-ignore */
+  opacity: 0.55;
+  pointer-events: none;
+}
+#heroCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.hero-inner {
+  /* --hp (0..1) is the hero's scroll progress, set in JS: text drifts up and fades */
+  transform: translateY(calc(var(--hp, 0) * -70px));
+  opacity: calc(1 - var(--hp, 0) * 1.1);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+  max-width: 960px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(4.5rem, 1.5rem + 12vw, 13rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.75rem;
+  transform: perspective(900px) rotateX(calc(var(--ty, 0) * -6deg)) rotateY(calc(var(--tx, 0) * 8deg));
+  transition: transform 900ms var(--ease);
+}
+/* Letters (split in JS): drop in one by one, then lift toward the pointer (--lift 0..1) */
+.hero-title .ch {
+  display: inline-block;
+  translate: 0 calc(var(--lift, 0) * -0.14em);
+  scale: calc(1 + var(--lift, 0) * 0.08);
+  transition: translate 450ms var(--ease), scale 450ms var(--ease), color 450ms var(--ease);
+  animation: drop 1100ms var(--ease) both;
+  animation-delay: calc(150ms + var(--i) * 55ms);
+}
+.hero-title .ch.is-near { color: var(--accent); }
+.hero-title em .ch.is-near { color: var(--text); }
+@keyframes drop { from { opacity: 0; transform: translateY(0.6em) rotate(8deg); filter: blur(8px); } }
+
+.hero-body {
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.35rem);
+  color: var(--text);
+  max-width: 48ch;
+  margin-inline: auto;
+}
+
+.hero-body { animation: rise 900ms var(--ease) both; }
+.hero-body { animation-delay: 750ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } }
+
+/* Scroll cue: a pill with a dot that keeps falling */
+.hero-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1.75rem;
+  z-index: 3;
+  width: 28px;
+  height: 46px;
+  margin-left: -14px;
+  border-radius: 999px;
+  background: var(--raised);
+  animation: rise 900ms var(--ease) 1200ms both;
+}
+.hero-cue-dot {
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: fall 1800ms var(--ease) infinite;
+}
+@keyframes fall { 0% { opacity: 0; translate: 0 0; } 30% { opacity: 1; } 100% { opacity: 0; translate: 0 18px; } }
+
+/* ==========================================================================
+   QUOTES
+   ========================================================================== */
+/* Bento: photo | the wish in focus | every sender. The focus travels down the
+   list like a carousel: the active name is sharp, the rest stay blurred
+   (the original Rona Masa blur), and its wish fills the feature tile. */
+.quote-bento {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 3fr);
+  gap: 1rem;
+  height: min(68dvh, 620px);
+}
+.q-photo { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--ink); }
+.q-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+.q-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
+  border-radius: var(--r-lg);
+  background: #fff;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+/* JS sets --qs from the wish's length so short and long wishes both fill the tile */
+.q-feature-text { font-family: var(--serif); font-size: var(--qs, 2rem); line-height: 1.2; flex: 1; }
+.q-feature-name { font-weight: 600; color: var(--secondary); }
+.q-feature-name::before { content: '— '; }
+
+.q-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 0.4rem;
+  min-height: 0;
+}
+.q-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 0.9rem;
+  text-align: left;
+  border-radius: var(--r-sm);
+  background: var(--polaroid);
+  overflow: hidden;
+  filter: blur(2.5px);
+  opacity: 0.45;
+  transform: scale(0.97);
+  transition: filter 600ms var(--ease), opacity 600ms var(--ease), transform 600ms var(--ease), background-color 600ms var(--ease);
+}
+.q-card:hover, .q-card:focus-visible { filter: blur(0.5px); opacity: 0.85; }
+.q-card.is-active { filter: none; opacity: 1; transform: none; background: #fff; }
+.q-card-name { font-family: var(--serif); font-size: 1.15rem; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Timer bar on the active name; its animationend advances the carousel (JS) */
+.q-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.q-card.is-active::after { animation: qtimer 3000ms linear forwards; }
+/* Reading the wish (hovering it) or the section being off-screen pauses the timer */
+.q-feature:hover ~ .q-list .q-card::after, .quote-bento:not(.is-visible) .q-card::after { animation-play-state: paused; }
+@keyframes qtimer { to { transform: scaleX(1); } }
+
+/* Phone: the wish on top, the names as a swipeable row underneath */
+@media (max-width: 760px) {
+  .quote-bento { display: flex; flex-direction: column; height: auto; }
+  .q-photo { display: none; }
+  .q-feature { height: 52dvh; }
+  .q-list { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.5rem; }
+  .q-card { flex: 0 0 auto; min-height: 48px; }
+}
+
+/* ==========================================================================
+   BIOSKOP
+   ========================================================================== */
+.videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 860px) { .videos-grid { grid-template-columns: 1fr; } }
+
+.v-card { display: flex; flex-direction: column; gap: 0.5rem; }
+.v-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+.v-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.v-caption { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; line-height: 1.15; }
+.v-desc { color: var(--muted); }
+
+
+/* ==========================================================================
+   SCROLL REVEAL (JS adds .is-visible; content stays visible without JS)
+   ========================================================================== */
+/* Uses the `translate` property so it never fights transform-based tilt/scale on the same element */
+.js .reveal { opacity: 0; translate: 0 40px; transition: opacity 900ms var(--ease), translate 900ms var(--ease); }
+.js .sec-title.reveal { translate: 0 70px; }
+.js .reveal.is-visible { opacity: 1; translate: 0 0; }
+/* Pictures wipe open from the top once their card is revealed */
+.js .reveal .v-embed { clip-path: inset(0 0 100% 0 round var(--r-md)); transition: clip-path 1100ms var(--ease) 150ms; }
+.js .reveal.is-visible .v-embed { clip-path: inset(0 0 0 0 round var(--r-md)); }
+/* Bento tiles rise one after another (translate only, so blur/scale keep their own timing) */
+.js .quote-bento.reveal { opacity: 1; translate: none; }
+.js .q-card { translate: 0 24px; }
+.js .q-feature { translate: 0 40px; transition: translate 1000ms var(--ease); }
+.js .quote-bento.is-visible .q-feature { translate: 0 0; }
+.js .quote-bento .q-card { transition-property: filter, opacity, transform, background-color, translate; transition-duration: 600ms, 600ms, 600ms, 600ms, 900ms; transition-delay: 0s, 0s, 0s, 0s, calc(var(--i, 0) * 25ms); }
+.js .quote-bento.is-visible .q-card { translate: 0 0; }
+/* Framed photos wipe open as their section arrives */
+/* Clip the img, not the figure: a fully clipped target never reports as intersecting */
+.js .q-photo img, .js .cine-photo img { clip-path: inset(100% 0 0 0); transition: clip-path 1200ms var(--ease); }
+.js .is-visible .q-photo img, .js .cine-photo.is-visible img { clip-path: inset(0); }
+.reveal[data-delay="1"] { transition-delay: 80ms; }
+.reveal[data-delay="2"] { transition-delay: 160ms; }
+.reveal[data-delay="3"] { transition-delay: 240ms; }
+.reveal[data-delay="4"] { transition-delay: 320ms; }
+.reveal[data-delay="5"] { transition-delay: 400ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  .js .reveal { opacity: 1; transform: none; }
+  #heroCanvas, .hero-spot, .progress { display: none; }
+  .hero-inner, .hero-bg { transform: none; opacity: 1; }
+  html { scroll-snap-type: none; }
+}
+
+/* ==========================================================================
+   SECTION THEMES: each section its own ground and layout. Photos always sit in
+   their own frame, never under text. Order: Ink → Kertas → Segel → Ink.
+   ========================================================================== */
+.quotes-panel, .cinema-panel { background: var(--ground); color: var(--on); }
+.quotes-panel .label, .cinema-panel .label { color: inherit; }
+
+/* Kutipan: Kertas Buku Harian, ink text, Rerumputan as the one accent */
+.quotes-panel { --ground: var(--paper); --on: var(--ink); --em: var(--ink); }
+.quotes-panel .sec-num { color: #4E8A33; }
+.quotes-panel .sec-title em { text-decoration: underline var(--green) 0.06em; text-underline-offset: 0.12em; }
+.quotes-panel .q-card { color: var(--ink); }
+
+/* Bioskop: Segel Surat ground, photo as a tall poster on the left */
+.cinema-panel { --ground: var(--secondary); --on: var(--text); --em: var(--accent); }
+.cinema-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); grid-template-rows: auto 1fr; column-gap: clamp(1.5rem, 3vw, 3rem); }
+.cine-photo { grid-row: 1 / 3; margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--ink); max-height: 78dvh; }
+.cine-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% top; }
+.cinema-inner > .sec-head, .cinema-inner > .videos-grid { grid-column: 2; }
+.cinema-panel .sec-num { color: var(--accent); }
+.cinema-panel .v-embed { background: var(--ink); }
+.cinema-panel .v-desc { color: var(--polaroid); }
+
+
+@media (max-width: 900px) {
+  .cinema-inner { grid-template-columns: 1fr; }
+  .cine-photo { grid-row: auto; max-height: 42dvh; margin-bottom: 1.5rem; }
+  .cinema-inner > .sec-head, .cinema-inner > .videos-grid { grid-column: 1; }
+}
+@media (max-width: 760px) {
+}
+
+/* Touch screens have no cursor to move over the name */
+
+/* The hero photo bleeds past the screen (inset -40px); that must not count as scrollable content */
+html.deck .hero { overflow: hidden; }
+
+/* ==========================================================================
+   OUTLINE DOODLES: computer line illustrations behind each section. Shapes are CSS
+   masks so --doodle tints them per section; they float slowly.
+   ========================================================================== */
+:root {
+  --i-power: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%2016A20%2020%200%201%200%2042%2016%22%2F%3E%3Cpath%20d%3D%22M32%208V30%22%2F%3E%3C%2Fsvg%3E");
+  --i-cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M16%208L16%2052L28%2041L36%2058L44%2054L36%2038L52%2038Z%22%2F%3E%3C%2Fsvg%3E");
+  --i-chip: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%224%22%2F%3E%3Crect%20x%3D%2225%22%20y%3D%2225%22%20width%3D%2214%22%20height%3D%2214%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M24%2016V8M32%2016V8M40%2016V8M24%2048V56M32%2048V56M40%2048V56M16%2024H8M16%2032H8M16%2040H8M48%2024H56M48%2032H56M48%2040H56%22%2F%3E%3C%2Fsvg%3E");
+  --i-monitor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%226%22%20y%3D%2210%22%20width%3D%2252%22%20height%3D%2234%22%20rx%3D%224%22%2F%3E%3Cpath%20d%3D%22M26%2044L23%2054M38%2044L41%2054M18%2054H46%22%2F%3E%3C%2Fsvg%3E");
+  --i-fan: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2224%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%225%22%2F%3E%3Cpath%20d%3D%22M32%2027C30%2018%2036%2012%2042%2014M37%2032C46%2030%2052%2036%2050%2042M32%2037C34%2046%2028%2052%2022%2050M27%2032C18%2034%2012%2028%2014%2022%22%2F%3E%3C%2Fsvg%3E");
+  --i-gamepad: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M18%2022H46C54%2022%2060%2030%2058%2042C57%2050%2050%2052%2046%2046L42%2040H22L18%2046C14%2052%207%2050%206%2042C4%2030%2010%2022%2018%2022Z%22%2F%3E%3Cpath%20d%3D%22M18%2028V36M14%2032H22%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2230%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2235%22%20r%3D%222%22%2F%3E%3C%2Fsvg%3E");
+  --i-mouse: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2218%22%20y%3D%226%22%20width%3D%2228%22%20height%3D%2252%22%20rx%3D%2214%22%2F%3E%3Cpath%20d%3D%22M32%206V24M18%2024H46%22%2F%3E%3C%2Fsvg%3E");
+  --i-floppy: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M10%2010H46L54%2018V54H10Z%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2210%22%20width%3D%2222%22%20height%3D%2214%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2234%22%20width%3D%2228%22%20height%3D%2220%22%2F%3E%3C%2Fsvg%3E");
+  --i-code: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M22%2018L8%2032L22%2046M42%2018L56%2032L42%2046M36%2012L28%2052%22%2F%3E%3C%2Fsvg%3E");
+}
+.doodles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.hero .doodles { z-index: 1; }
+.panel > .wrap { position: relative; z-index: 1; }
+.d {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  aspect-ratio: 1;
+  background: var(--c, var(--doodle));
+  -webkit-mask: var(--m) center / contain no-repeat;
+  mask: var(--m) center / contain no-repeat;
+  rotate: var(--r);
+  animation: bob var(--t) ease-in-out infinite alternate;
+}
+@keyframes bob { to { translate: 0 -16px; rotate: calc(var(--r) + 9deg); } }
+.hero { --doodle: rgba(214, 255, 77, 0.42); }
+.quotes-panel { --doodle: rgba(44, 38, 35, 0.22); }
+.cinema-panel { --doodle: rgba(243, 241, 236, 0.4); }
+@media (max-width: 760px) { .d { width: calc(var(--s) * 0.6); } .d:nth-child(n+5) { display: none; } }
+
+/* ==========================================================================
+   GALERI FANART: bento of eight pieces. Tiles open in on arrival, tilt toward
+   the pointer, dim their neighbours on hover, and open in a lightbox.
+   ========================================================================== */
+.gallery-panel { --ground: var(--bg); --on: var(--text); --doodle: rgba(214, 255, 77, 0.35); background: var(--ground); color: var(--on); }
+.gallery-head { flex-direction: row; flex-wrap: wrap; align-items: flex-end; column-gap: 1.5rem; }
+.gallery-head .sec-num { flex-basis: 100%; }
+.gallery-head .btn { margin-left: auto; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  height: min(64dvh, 600px);
+}
+.g-wide { grid-column: span 2; }
+.g-tall { grid-row: span 2; }
+
+/* --rx/--ry tilt from JS; --i staggers the entrance */
+.g-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--raised);
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 500ms var(--ease), opacity 500ms var(--ease), filter 500ms var(--ease);
+}
+.g-item img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: scale 900ms var(--ease); }
+.g-item:hover img, .g-item:focus-visible img { scale: 1.08; }
+.gallery:hover .g-item:not(:hover) { opacity: 0.45; filter: grayscale(0.7); }
+.g-cap {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  translate: 0 140%;
+  transition: translate 500ms var(--ease);
+}
+.g-item:hover .g-cap, .g-item:focus-visible .g-cap { translate: 0 0; }
+
+/* Entrance: each tile wipes open and settles, one after another */
+.js .gallery.reveal { opacity: 1; translate: none; }
+.js .g-item { clip-path: inset(100% 0 0 0 round var(--r-lg)); scale: 0.92; transition: transform 500ms var(--ease), opacity 500ms var(--ease), filter 500ms var(--ease), clip-path 1000ms var(--ease) calc(var(--i) * 80ms), scale 1000ms var(--ease) calc(var(--i) * 80ms); }
+.js .gallery.is-visible .g-item { clip-path: inset(0 0 0 0 round var(--r-lg)); scale: 1; }
+
+/* Lightbox (native <dialog>: Esc and focus handling come for free) */
+.g-lightbox {
+  margin: auto;
+  width: min(92vw, 1100px);
+  max-height: 92dvh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: visible;
+}
+.g-lightbox::backdrop { background: rgba(11, 11, 12, 0.92); }
+.g-lightbox[open] { animation: lb-in 500ms var(--ease); }
+.g-lightbox[open]::backdrop { animation: lb-fade 500ms var(--ease); }
+@keyframes lb-in { from { opacity: 0; scale: 0.9; translate: 0 30px; } }
+@keyframes lb-fade { from { opacity: 0; } }
+.g-lb-figure { margin: 0; display: grid; gap: 1rem; justify-items: center; }
+.g-lb-figure img { max-width: 100%; max-height: 80dvh; border-radius: var(--r-lg); object-fit: contain; }
+.g-lb-figure figcaption { display: flex; gap: 1rem; align-items: baseline; font-family: var(--serif); font-size: 1.5rem; }
+.g-lb-count { font-family: var(--sans); font-size: 0.875rem; color: var(--muted); }
+.g-lb-btn {
+  position: fixed;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--text);
+  font-size: 1.25rem;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), scale 200ms var(--ease);
+}
+.g-lb-btn:hover { background: var(--accent); color: var(--accent-ink); }
+.g-lb-btn:active { scale: 0.92; }
+.g-lb-prev { left: 1.5rem; top: 50%; translate: 0 -50%; }
+.g-lb-next { right: 1.5rem; top: 50%; translate: 0 -50%; }
+.g-lb-close { right: 1.5rem; top: 1.5rem; }
+
+@media (max-width: 760px) {
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 200px; grid-auto-flow: dense; height: auto; }
+  .g-cap { translate: 0 0; }
+  .g-lb-prev, .g-lb-next { top: auto; bottom: 1.5rem; translate: none; }
+  .g-lb-prev { left: calc(50% - 64px); }
+  .g-lb-next { right: calc(50% - 64px); }
+}
+
+/* ==========================================================================
+   SUARA: per-quote voice player (play button + progress), equaliser on the
+   playing name, carousel timer paused while a clip plays.
+   ========================================================================== */
+.q-voice { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.q-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0 1.1rem 0 0.9rem;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 600;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), scale 200ms var(--ease);
+}
+.q-play:hover { background: #8AD46B; }
+.q-play:active { scale: 0.95; }
+.q-play.is-on { background: var(--secondary); color: var(--text); }
+/* Triangle (play) turns into two bars (pause) */
+.q-play-icon { width: 14px; height: 14px; background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%); transition: clip-path 300ms var(--ease); }
+.q-play.is-on .q-play-icon { clip-path: polygon(0 0, 34% 0, 34% 100%, 0 100%, 0 0, 66% 0, 66% 0, 100% 0, 100% 100%, 66% 100%, 66% 0); }
+.q-bar { flex: 1 1 80px; height: 4px; border-radius: 2px; background: rgba(44, 38, 35, 0.12); overflow: hidden; }
+.q-bar i { display: block; height: 100%; width: 0; background: var(--secondary); }
+.q-time { font-size: 0.8125rem; color: #5C534B; font-variant-numeric: tabular-nums; min-width: 5.5ch; }
+
+.q-card { justify-content: space-between; gap: 0.5rem; }
+.q-card-eq { color: var(--green); opacity: 0.8; flex: none; }
+.q-card-eq i { height: 5px; }
+.q-card.is-voice .q-card-eq { color: var(--secondary); opacity: 1; }
+.q-card.is-voice .q-card-eq i { animation: eq 700ms var(--ease) infinite alternate; }
+.q-card.is-voice .q-card-eq i:nth-child(2) { animation-delay: 120ms; }
+.q-card.is-voice .q-card-eq i:nth-child(3) { animation-delay: 240ms; }
+.quote-bento.is-voice .q-card::after { animation-play-state: paused; }
+
+/* Hero subtitle: serif, words rise one by one, keywords in lime italic with a drawn underline */
+.hero-body {
+  animation: none;
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 1rem + 1.1vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  max-width: 44ch;
+  text-wrap: balance;
+  margin-top: 0.5rem;
+}
+.hero-body .w { display: inline-block; animation: rise 800ms var(--ease) both; animation-delay: calc(700ms + var(--w) * 70ms); }
+.hero-body em { position: relative; }
+.hero-body em::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.06em;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: draw 700ms var(--ease) both;
+  animation-delay: calc(1100ms + var(--w, 0) * 70ms);
+}
+@keyframes draw { to { transform: scaleX(1); } }

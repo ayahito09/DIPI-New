@@ -1,0 +1,1746 @@
+{
+ "url": "index.html",
+ "at": "2026-10-24T16:29:52.797Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.92,
+    1,
+    1,
+    0.27
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 16,
+    "transitions": 21,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 3600,
+     "screens": 4,
+     "words": 226,
+     "img": 4,
+     "video": 0,
+     "canvas": 1,
+     "svg": 0,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 6,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "heart-box.png",
+      "umbrella-peace.png",
+      "maid-costume.png",
+      "heart-hands.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "chars": 12,
+     "lines": 1,
+     "size": 196.8,
+     "vw": 13.7,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.57,
+     "top": 282,
+     "mixedFonts": [
+      "Instrument Serif",
+      "Instrument Serif italic"
+     ],
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "lines": 1,
+     "size": 196.8,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Divya Peashy",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 196.8,
+      "vw": 13.7,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.57,
+      "top": 282,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Kutipan rasa",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 83.2,
+      "vw": 5.8,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 1082,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bioskop memori",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 83.2,
+      "vw": 5.8,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.68,
+      "top": 2088,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Kenangan bukanlah untuk ditinggalkan, melainkan untuk dirawat agar selalu menghangatkan hari esok.\"",
+      "words": 12,
+      "chars": 100,
+      "lines": 3,
+      "size": 33.6,
+      "vw": 2.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.43,
+      "top": 2963,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Rona Masa*.",
+      "words": 2,
+      "chars": 11,
+      "lines": 1,
+      "size": 188.8,
+      "vw": 13.1,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.85,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.53,
+      "top": 3169,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 3,
+     "over2Lines": 0,
+     "statements": 2,
+     "centered": 1,
+     "medianWords": 2,
+     "mixedFontHeadings": 4
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Instrument Serif",
+       "share": 0.65,
+       "mono": false
+      },
+      {
+       "family": "Geist",
+       "share": 0.35,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      16,
+      19,
+      20,
+      24,
+      26,
+      29,
+      34,
+      83,
+      189,
+      197
+     ],
+     "sizeCount": 12,
+     "notLoaded": [],
+     "body": {
+      "font": "Instrument Serif",
+      "size": 19.4,
+      "leading": 1.22,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 12.6
+     },
+     "measureChars": 27,
+     "max": {
+      "size": 196.8,
+      "vw": 13.7,
+      "font": "Instrument Serif",
+      "text": "D"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.12,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b0b0c",
+     "bodyBgHsl": {
+      "h": 240,
+      "s": 0.04,
+      "l": 0.05
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#f8f6f1",
+       "top": 900,
+       "hsl": {
+        "h": 43,
+        "s": 0.33,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#f3c8c3",
+       "top": 1800,
+       "hsl": {
+        "h": 6,
+        "s": 0.67,
+        "l": 0.86
+       }
+      },
+      {
+       "color": "#0b0b0c",
+       "top": 2700,
+       "hsl": {
+        "h": 240,
+        "s": 0.04,
+        "l": 0.05
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2d2723",
+       "share": 0.58
+      },
+      {
+       "color": "#5d524b",
+       "share": 0.17
+      },
+      {
+       "color": "#f2f0ec",
+       "share": 0.15
+      },
+      {
+       "color": "#8e8d87",
+       "share": 0.06
+      },
+      {
+       "color": "#bc0202",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#1b1b1e",
+      "hsl": {
+       "h": 240,
+       "s": 0.05,
+       "l": 0.11
+      },
+      "fg": "#f2f0ec"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Suara nostalgia"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 9,
+     "boxRadius": 24,
+     "squareMedia": 3,
+     "roundedMedia": 4,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 132,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "instrument serif"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 3600,
+    "margins": {
+     "left": 48,
+     "right": 53
+    },
+    "sections": [
+     {
+      "sel": "section#hero.panel.hero",
+      "tag": "section",
+      "top": 0,
+      "height": 900,
+      "words": 28,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 427,
+      "right": 427,
+      "textLeft": 427,
+      "textRight": 427,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#quotes.panel.quotes-panel",
+      "tag": "section",
+      "top": 900,
+      "height": 900,
+      "words": 147,
+      "media": 1,
+      "middle": 26,
+      "heading": {
+       "text": "\"Beberapa orang hadir bukan hanya sekadar melintas",
+       "size": 29,
+       "tag": "span"
+      },
+      "left": 48,
+      "right": 53,
+      "textLeft": 417,
+      "textRight": 81,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#bioskop.panel.cinema-panel",
+      "tag": "section",
+      "top": 1800,
+      "height": 900,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.site-footer",
+      "tag": "footer",
+      "top": 2700,
+      "height": 900,
+      "words": 23,
+      "media": 2,
+      "middle": 177,
+      "heading": {
+       "text": "Rona Masa",
+       "size": 189,
+       "tag": "p"
+      },
+      "left": 48,
+      "right": 34,
+      "textLeft": 48,
+      "textRight": 630,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 1788,
+      "height": 1172
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Divya Peashy",
+      "size": 197,
+      "top": 282,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 19,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.89,
+    1,
+    1,
+    1,
+    0.25
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 16,
+    "transitions": 21,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 4830,
+     "screens": 4.7,
+     "words": 226,
+     "img": 4,
+     "video": 0,
+     "canvas": 1,
+     "svg": 0,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 6,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "heart-box.png",
+      "umbrella-peace.png",
+      "maid-costume.png",
+      "heart-hands.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "chars": 12,
+     "lines": 1,
+     "size": 116.2,
+     "vw": 15.1,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.63,
+     "top": 384,
+     "mixedFonts": [
+      "Instrument Serif",
+      "Instrument Serif italic"
+     ],
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "lines": 1,
+     "size": 116.2,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Divya Peashy",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 116.2,
+      "vw": 15.1,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.63,
+      "top": 384,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Kutipan rasa",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 56.3,
+      "vw": 7.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1275,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bioskop memori",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 56.3,
+      "vw": 7.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2671,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Kenangan bukanlah untuk ditinggalkan, melainkan untuk dirawat agar selalu menghangatkan hari esok.\"",
+      "words": 12,
+      "chars": 100,
+      "lines": 3,
+      "size": 26.9,
+      "vw": 3.5,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 4367,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Rona Masa*.",
+      "words": 2,
+      "chars": 11,
+      "lines": 1,
+      "size": 108.2,
+      "vw": 14.1,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.85,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.57,
+      "top": 4549,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 3,
+     "over2Lines": 0,
+     "statements": 2,
+     "centered": 1,
+     "medianWords": 2,
+     "mixedFontHeadings": 4
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Instrument Serif",
+       "share": 0.65,
+       "mono": false
+      },
+      {
+       "family": "Geist",
+       "share": 0.35,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      16,
+      17,
+      18,
+      22,
+      24,
+      26,
+      27,
+      56,
+      108,
+      116
+     ],
+     "sizeCount": 12,
+     "notLoaded": [],
+     "body": {
+      "font": "Instrument Serif",
+      "size": 16.7,
+      "leading": 1.22,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 12.6
+     },
+     "measureChars": 11,
+     "max": {
+      "size": 116.2,
+      "vw": 15.1,
+      "font": "Instrument Serif",
+      "text": "D"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.12,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b0b0c",
+     "bodyBgHsl": {
+      "h": 240,
+      "s": 0.04,
+      "l": 0.05
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#f8f6f1",
+       "top": 1024,
+       "hsl": {
+        "h": 43,
+        "s": 0.33,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#f3c8c3",
+       "top": 2048,
+       "hsl": {
+        "h": 6,
+        "s": 0.67,
+        "l": 0.86
+       }
+      },
+      {
+       "color": "#2d2723",
+       "top": 2139,
+       "hsl": {
+        "h": 24,
+        "s": 0.13,
+        "l": 0.16
+       }
+      },
+      {
+       "color": "#0b0b0c",
+       "top": 3806,
+       "hsl": {
+        "h": 240,
+        "s": 0.04,
+        "l": 0.05
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2d2723",
+       "share": 0.58
+      },
+      {
+       "color": "#5d524b",
+       "share": 0.17
+      },
+      {
+       "color": "#f2f0ec",
+       "share": 0.15
+      },
+      {
+       "color": "#8e8d87",
+       "share": 0.06
+      },
+      {
+       "color": "#bc0202",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#1b1b1e",
+      "hsl": {
+       "h": 240,
+       "s": 0.05,
+       "l": 0.11
+      },
+      "fg": "#f2f0ec"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 2,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 40,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Suara nostalgia"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 11,
+     "boxRadius": 24,
+     "squareMedia": 3,
+     "roundedMedia": 1,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 105,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "instrument serif"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 4830,
+    "margins": {
+     "left": 31,
+     "right": 33
+    },
+    "sections": [
+     {
+      "sel": "section#hero.panel.hero",
+      "tag": "section",
+      "top": 0,
+      "height": 1024,
+      "words": 28,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 120,
+      "right": 120,
+      "textLeft": 120,
+      "textRight": 120,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#quotes.panel.quotes-panel",
+      "tag": "section",
+      "top": 1024,
+      "height": 1024,
+      "words": 147,
+      "media": 1,
+      "middle": 21,
+      "heading": null,
+      "left": 31,
+      "right": 33,
+      "textLeft": 231,
+      "textRight": 44,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#bioskop.panel.cinema-panel",
+      "tag": "section",
+      "top": 2048,
+      "height": 1758,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.site-footer",
+      "tag": "footer",
+      "top": 3806,
+      "height": 1024,
+      "words": 23,
+      "media": 2,
+      "middle": 57,
+      "heading": null,
+      "left": 31,
+      "right": 55,
+      "textLeft": 31,
+      "textRight": 55,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 1968,
+      "height": 2120
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Divya Peashy",
+      "size": 116,
+      "top": 384,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 17,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.86,
+    1,
+    1,
+    0.7,
+    0.36
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 15,
+    "transitions": 22,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 3836,
+     "screens": 4.5,
+     "words": 224,
+     "img": 4,
+     "video": 0,
+     "canvas": 1,
+     "svg": 0,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 6,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "heart-box.png",
+      "umbrella-peace.png",
+      "maid-costume.png",
+      "heart-hands.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 1,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "chars": 12,
+     "lines": 1,
+     "size": 72,
+     "vw": 18.5,
+     "font": "Instrument Serif",
+     "weight": 400,
+     "tracking": -0.035,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.77,
+     "top": 304,
+     "mixedFonts": [
+      "Instrument Serif",
+      "Instrument Serif italic"
+     ],
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Divya Peashy",
+     "words": 2,
+     "lines": 1,
+     "size": 72,
+     "font": "Instrument Serif"
+    },
+    "headings": [
+     {
+      "text": "Divya Peashy",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 72,
+      "vw": 18.5,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.035,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 304,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Kutipan rasa",
+      "words": 2,
+      "chars": 12,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1142,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Bioskop memori",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.02,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2226,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Langkah awal & nyanyian senja",
+      "words": 5,
+      "chars": 29,
+      "lines": 1,
+      "size": 25.6,
+      "vw": 6.6,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2534,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Harmoni cerita & senyuman",
+      "words": 4,
+      "chars": 25,
+      "lines": 1,
+      "size": 25.6,
+      "vw": 6.6,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2899,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "\"Kenangan bukanlah untuk ditinggalkan, melainkan untuk dirawat agar selalu menghangatkan hari esok.\"",
+      "words": 12,
+      "chars": 100,
+      "lines": 3,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 3451,
+      "mixedFonts": [
+       "Instrument Serif",
+       "Instrument Serif italic"
+      ],
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "Rona Masa*.",
+      "words": 2,
+      "chars": 11,
+      "lines": 1,
+      "size": 64,
+      "vw": 16.4,
+      "font": "Instrument Serif",
+      "weight": 400,
+      "tracking": -0.03,
+      "leading": 0.85,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.66,
+      "top": 3622,
+      "tag": "p",
+      "kind": "statement"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 3,
+     "over2Lines": 0,
+     "statements": 2,
+     "centered": 1,
+     "medianWords": 4,
+     "mixedFontHeadings": 4
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Instrument Serif",
+       "share": 0.65,
+       "mono": false
+      },
+      {
+       "family": "Geist",
+       "share": 0.35,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      16,
+      17,
+      22,
+      24,
+      26,
+      44,
+      64,
+      72
+     ],
+     "sizeCount": 10,
+     "notLoaded": [],
+     "body": {
+      "font": "Instrument Serif",
+      "size": 16,
+      "leading": 1.22,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 12.6
+     },
+     "measureChars": 23,
+     "max": {
+      "size": 72,
+      "vw": 18.5,
+      "font": "Instrument Serif",
+      "text": "D"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.11,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0b0b0c",
+     "bodyBgHsl": {
+      "h": 240,
+      "s": 0.04,
+      "l": 0.05
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#f8f6f1",
+       "top": 844,
+       "hsl": {
+        "h": 43,
+        "s": 0.33,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 1209,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f3c8c3",
+       "top": 1688,
+       "hsl": {
+        "h": 6,
+        "s": 0.67,
+        "l": 0.86
+       }
+      },
+      {
+       "color": "#2d2723",
+       "top": 1770,
+       "hsl": {
+        "h": 24,
+        "s": 0.13,
+        "l": 0.16
+       }
+      },
+      {
+       "color": "#0b0b0c",
+       "top": 2992,
+       "hsl": {
+        "h": 240,
+        "s": 0.04,
+        "l": 0.05
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#2d2723",
+       "share": 0.58
+      },
+      {
+       "color": "#5d524b",
+       "share": 0.17
+      },
+      {
+       "color": "#f2f0ec",
+       "share": 0.14
+      },
+      {
+       "color": "#8e8d87",
+       "share": 0.06
+      },
+      {
+       "color": "#bc0202",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#bc0202",
+      "hsl": {
+       "h": 0,
+       "s": 0.98,
+       "l": 0.37
+      },
+      "fg": "#f2f0ec"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 1,
+     "inHero": 0,
+     "radius": "pill",
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 11,
+     "boxRadius": 24,
+     "squareMedia": 3,
+     "roundedMedia": 2,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "bg-image",
+      "ratio": 1
+     },
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 92,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "geist",
+     "instrument serif"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 3836,
+    "margins": {
+     "left": 16,
+     "right": 23
+    },
+    "sections": [
+     {
+      "sel": "section#hero.panel.hero",
+      "tag": "section",
+      "top": 0,
+      "height": 844,
+      "words": 28,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": 23,
+      "right": 23,
+      "textLeft": 23,
+      "textRight": 23,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#quotes.panel.quotes-panel",
+      "tag": "section",
+      "top": 844,
+      "height": 844,
+      "words": 147,
+      "media": 1,
+      "middle": 1061,
+      "heading": null,
+      "left": 0,
+      "right": 0,
+      "textLeft": 69,
+      "textRight": -1167,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#bioskop.panel.cinema-panel",
+      "tag": "section",
+      "top": 1688,
+      "height": 1304,
+      "words": 0,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.site-footer",
+      "tag": "footer",
+      "top": 2992,
+      "height": 844,
+      "words": 23,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "\"Kenangan bukanlah untuk ditinggalkan, melainkan u",
+       "size": 24,
+       "tag": "p"
+      },
+      "left": 16,
+      "right": 32,
+      "textLeft": 16,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 1552,
+      "height": 1620
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Divya Peashy",
+      "size": 72,
+      "top": 304,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [],
+    "leftBlocks": 0,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "mixed-font-headline",
+   "width": 1440,
+   "message": "4 headline(s) switch typeface or to italic mid-line (the \"one italic serif word\" move).",
+   "fix": "Set the whole headline in one face. Emphasis comes from the words.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 1440,
+   "message": "Yellow-cream background (section #f8f6f1, text #f2f0ec).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "12 different font sizes (13, 14, 16, 19, 20, 24, 26, 29, 34, 83, 189, 197).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "blank-gap",
+   "width": 1440,
+   "message": "1 stretch(es) of the page hold nothing at all: 1172px at 1788px (the screen is 900px tall).",
+   "fix": "Close the gap: a section gap is 120–240px on desktop and 72–112px on a phone. Look for a min-height: 100vh on a short section, an empty grid row, a hidden element still holding its space, or a reveal that never fired. A deliberate rest is a placed picture or colour field, not nothing.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "first-action",
+   "width": 390,
+   "message": "No visible button in the first phone screen.",
+   "fix": "On a phone the first screen still holds the headline, the supporting sentence and the action; move navigation into one row or a menu so it does not push them down."
+  },
+  {
+   "level": "WARN",
+   "id": "side-scroll",
+   "width": 390,
+   "message": "1 row(s) scroll sideways with content past their edge.",
+   "fix": "Jurors and most visitors read a row cut at the edge as clipped, not as scrollable. Wrap it onto more lines, or end it inside the grid."
+  },
+  {
+   "level": "WARN",
+   "id": "name-only-title",
+   "width": 390,
+   "message": "The h1 is a bare name (\"Divya Peashy\") and nothing else on the first screen says what this is.",
+   "fix": "Keep the name if it leads, and give the line under it (18px or more) the plain words: what it is, for whom, where or when. In the study of 97 Sites of the Day, first screens that named nothing lost usability and content points."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\Azmi\\Documents\\GitHub\\DIPI\\.taste-skill\\inspect\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

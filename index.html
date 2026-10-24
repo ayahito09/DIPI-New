@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divya Peashy — Kembali Mengingat Kenangan</title>
+  <meta name="description" content="Lembaran nostalgia interaktif. Merawat setiap jejak cerita, tawa hangat, dan detik berharga yang pernah kita bagi bersama.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="Style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230B0B0C'/><text y='70' x='50' font-size='64' text-anchor='middle' fill='%23D6FF4D' font-family='serif' font-style='italic'>R</text></svg>">
+</head>
+<body>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ========== FLOATING AMBIENT AUDIO ========== -->
+  <audio id="bgAudio" src="assets/audio/penjaga-hati.mp3" preload="auto" loop></audio>
+  <button id="btnAudio" class="audio-btn audio-btn--floating" aria-pressed="false" aria-label="Putar lagu Penjaga Hati oleh Nadhif Basalamah">
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="audio-label">Penjaga Hati</span>
+  </button>
+
+  <main>
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="panel hero" data-fx="zoom">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-spot" aria-hidden="true"></div>
+      <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="doodles" aria-hidden="true">
+      <i class="d" style="--m:var(--i-cursor);--x:6%;--y:14%;--s:84px;--r:-12deg;--t:7s"></i>
+      <i class="d" style="--m:var(--i-chip);--x:86%;--y:10%;--s:70px;--r:10deg;--t:6s;--c:#FF8A5B"></i>
+      <i class="d" style="--m:var(--i-gamepad);--x:80%;--y:66%;--s:120px;--r:14deg;--t:9s"></i>
+      <i class="d" style="--m:var(--i-power);--x:10%;--y:70%;--s:90px;--r:-8deg;--t:8s;--c:#BC0202"></i>
+      <i class="d" style="--m:var(--i-monitor);--x:62%;--y:8%;--s:110px;--r:0deg;--t:11s"></i>
+      <i class="d" style="--m:var(--i-chip);--x:28%;--y:84%;--s:44px;--r:0deg;--t:5s"></i>
+    </div>
+
+      <div class="hero-inner wrap">
+        <h1 class="hero-title" aria-label="Divya Peashy">Divya <em>Peashy</em></h1>
+        <p class="hero-body" aria-label="Sudut hening tempat kita pulang, merawat tawa dan hangatnya sebuah nama abadi."><span class="w" style="--w:0">Sudut</span> <span class="w" style="--w:1"><em>hening</em></span> <span class="w" style="--w:2">tempat</span> <span class="w" style="--w:3">kita</span> <span class="w" style="--w:4">pulang,</span> <span class="w" style="--w:5">merawat</span> <span class="w" style="--w:6"><em>tawa</em></span> <span class="w" style="--w:7">dan</span> <span class="w" style="--w:8">hangatnya</span> <span class="w" style="--w:9">sebuah</span> <span class="w" style="--w:10">nama</span> <span class="w" style="--w:11"><em>abadi.</em></span></p>
+      </div>
+
+      <a href="#quotes" class="hero-cue" aria-label="Lanjut ke kutipan">
+        <span class="hero-cue-dot" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ========== QUOTES ========== -->
+    <section id="quotes" class="panel quotes-panel" data-fx="circle">
+    <div class="doodles" aria-hidden="true">
+      <i class="d" style="--m:var(--i-fan);--x:90%;--y:8%;--s:120px;--r:12deg;--t:9s;--c:#76C457"></i>
+      <i class="d" style="--m:var(--i-floppy);--x:3%;--y:62%;--s:96px;--r:-10deg;--t:8s"></i>
+      <i class="d" style="--m:var(--i-monitor);--x:70%;--y:84%;--s:120px;--r:0deg;--t:12s"></i>
+      <i class="d" style="--m:var(--i-power);--x:44%;--y:3%;--s:60px;--r:14deg;--t:7s;--c:#BC0202"></i>
+      <i class="d" style="--m:var(--i-cursor);--x:94%;--y:56%;--s:56px;--r:-8deg;--t:6s;--c:#76C457"></i>
+      <i class="d" style="--m:var(--i-chip);--x:22%;--y:90%;--s:50px;--r:0deg;--t:5s"></i>
+    </div>
+      <div class="wrap">
+        <header class="sec-head">
+          <span class="sec-num">Bagian I</span>
+          <h2 class="sec-title">Ucapan <em>untuk Dipi</em></h2>
+        </header>
+
+        <div class="quote-bento" id="quoteStrip">
+          <figure class="q-photo">
+            <img src="assets/images/heart-box.png" alt="Gadis berambut hijau memegang kotak hati merah jambu" loading="lazy">
+          </figure>
+
+          <blockquote class="q-feature" id="qFeature">
+            <p class="q-feature-text" id="qText">&quot;Idaman semua orang.&quot; Yakali gak idaman orang RGB. Senyumnya manis, suaranya lembut, merdu, orangnya energik, ceria, bener-bener sempurna. Oh iya, aku, Zaphyna mengucapkan happy birthday untuk Divya Peashy, and thank you.</p>
+            <footer class="q-feature-name" id="qName">Zaphyna</footer>
+            <div class="q-voice">
+              <button class="q-play" id="qPlay" aria-label="Putar suara">
+                <span class="q-play-icon" aria-hidden="true"></span>
+                <span id="qPlayLabel">Putar suara</span>
+              </button>
+              <span class="q-bar" aria-hidden="true"><i id="qBar"></i></span>
+              <span class="q-time" id="qTime">0:00</span>
+            </div>
+          </blockquote>
+
+          <div class="q-list" role="group" aria-label="Pengirim ucapan">
+          <button class="q-card is-active" data-idx="0" data-audio="assets/audio/01.mp3" data-quote="&quot;Idaman semua orang.&quot; Yakali gak idaman orang RGB. Senyumnya manis, suaranya lembut, merdu, orangnya energik, ceria, bener-bener sempurna. Oh iya, aku, Zaphyna mengucapkan happy birthday untuk Divya Peashy, and thank you.">
+            <span class="q-card-name">Zaphyna</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="1" data-audio="assets/audio/02.mp3" data-quote="Hello baby girl. Omaygaad. Happy birthday to my lovelly personal computer Divya Peashy. Hahahahahahahaha, haduh geli bet anjir gue. OHOK OHOK aduh batuk dulu maap. Yaa apa ya, happy birthday ya dip. Pokoknya dipi sehat-sehat, makin sabar, makin banyak yang sayang sama dipi, terus dipi makin kaya, makin banyak duit. Gua sumpahin lu ketiban duit 10m mantap. Amiin ya, terus apalagi ya? Bingung gua dip mau ngomong apaan dah gitu aja lah. Kata mail soalnya jangan lama-lama anjir, ntar dia ribet ngeditnya katanya. Yaudah pokoknya gitu. Nyanyi dikit kali ya. Happy Birthday~ Happy Birthday~ Happy Birthday~ Dipiiiii~ Anjaaaayyyy. Happy Birthday dip.">
+            <span class="q-card-name">Dhado</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="2" data-audio="assets/audio/03.mp3" data-quote="Letsgooo dipiii. Selamat ulang tahun yang ke 2537. Semoga yang didoakan tercapai semua, Aamiin. Sehat selalu, bahagia selalu, semangat terus streamingnya, banyak uang ya gak si? Aamiin. Pendapat tentang dipi, kalau gua nonton sih ya, dipi tuh selalu bikin ngakak, ada aja kelakuannya, walaupun sedikit dongo, dikit ajaa. Semoga kedepannya makin sukses sampe 10 juta subs gak sih, ya gak? Letsgooo 10 juta. Ya paling itu aja, sekali lagi selamat ulang tahun buat dipi, sukses terus Aamiin.">
+            <span class="q-card-name">Dedews</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="3" data-audio="assets/audio/04.mp3" data-quote="Divya Peashy itu adalah salah satu VTuber yang jujur gue suka banget karena personalnya, pembawaannya, ya story tellingnya juga bagus ternyata, dan juga aset yang badag gak gak bercanda bercanda. Jujur ya salah satu VTuber yang apa adanya gitu, gak dibuat-buat sama sekali. Bisa dikatakan si VTuber satu ini suka banget ya temprament gitu ya setiap stream, apalagi ke viewers-viewersnya ya kan. Tapi jujur aja ya, jarang-jarang ada VTuber yang beneran marah di stream, apalagi suka menghalu gitu kan, ngambil istri orang. Tapi terlepas dari itu semua, jujur ya salah satu VTuber yang kutonton sampe sekarang dan betah banget di Divya Peashy alias Dipi. Dan selamat ulang tahun untuk Divya Peashy, semoga rejekinya selalu dilancarkan, menjadi pribadi yang lebih baik, masalah dan urusan segera diselesaikan, impian dipi yang belum tercapai, dari yang real life sampai menjadi VTuber segera tercapai, Aamiin.">
+            <span class="q-card-name">Farchan Dwi Laksono</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="4" data-audio="assets/audio/05.mp3" data-quote="Halo haloo... Ok ini mau ngasih ucapan buat dipi ya? Kita mau kopi kanan dikit dulu kali ya. Dalam sepi~ dan rasa sabar mana lagi~ yang harus kupendam dalam~ mengagumi dirimu~ Pengen banget dapet gachanya~ gak punya twitter masalahnya~ yang mampu membuatku~ tersadar dan sedikit menepi~ Aseekk... okeee. Ucapan buat dipi ya. Ini karena aku bapak-bapak ya aku mau pantun dulu. Makan bolu ama si joni Minumnya kopi di sore hari Rukuman Nuru ada disini Adek dipi jangan lari Xixixixixi... Ok pendapat soal dipi ya. Kalo menurut aku sih gila banget ya itu ya, si dipi itu sumpah seru banget liat kontennya. Meskipun kadang random gitu ya, maen game terus tiba-tiba nyanyi, terus tiba-tiba tidur, tapi mungkin itu kali yang bikin jadi berkesan ya. Konten yang paling aku suka itu adalah konten yang ada jamnya itu loh guys. Tau gak yang mana? Yak betul, itu adalah konten turu stream ketika donothon ya, canda ya pia ya. Terus berkarya divy, thanks for everything youve done and tentunya, happy birthday dipi. Semoga dimudahkan dalam menggapai cita dan cintanya, wish you all the best. Ini gua kalo mau RAWR gak bisa nih. RAAWRR eh gimana sih? Eh udah dah. Ok tadi dibuka dengan pantun sekarang ditutup dengan pantun lagi. Udang bihun aku siapkan Untuk dirimu ketika pulang Selamat ulang tahun aku ucapkan Tolong Nuru jangan dibuang Dadaaah. Ini lagunya enak banget cuy sumpah. Dip nanti nyanyiin ini dong dip. Baaaaayyyy.">
+            <span class="q-card-name">Rukuman Nuru</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="5" data-audio="assets/audio/06.mp3" data-quote="Happy Birthday dipi. Semoga sehat selalu, panjang umur, dan dimudahkan rezekinya.">
+            <span class="q-card-name">Thony De Coco</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="6" data-audio="assets/audio/07.mp3" data-quote="Happy Birthday dipi. Ya walaupun kamu sudah nambah TUA, kamu harus tetap sehat dan semangat terus ya. Semoga dipi gak bosen-bosen dengan perilaku para viewers mu yang random-random ini, ya walaupun gak jauh beda sih sama streamernya ya. Ya sekali lagi selamat ulang tahun ya dipi, kami selalu mendukungmu.">
+            <span class="q-card-name">Raina</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="7" data-audio="assets/audio/08.mp3" data-quote="Halo dip selamat ulang tahun, semoga panjang umur dan sehat selalu. Jujur, pandangan gua ke lu sih, lu tuh orangnya kuat dip. Lu pernah cerita masalah-masalah lu, dan lu bisa ngehadepin itu semua dip. Jujur lu salah satu orang yang berharga bagi gua, karena lu itu motivator hidup gua. Kadang seneng kalo denger lu nasehatin orang atau ngemotivasi orang. Gue punya nilai yang jelek sama selalu pesimis sama diri gue sendiri dulu. Tapi gara-gara lu, gue bisa jadi sedikit percaya diri walau nilai gue selalu ampas, tapi gw jadi punya kemauan lagi buat ngembangin nilai. Ya itu gara-gara gua inget sama salah satu kata-kata lu, pun gue lupa kata-kata lu apa ya, yang bikin gue termotivasi. Ya... Selamat ulang tahun dip, sekali lagi. Dadah.">
+            <span class="q-card-name">Lingga</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="8" data-audio="assets/audio/09.mp3" data-quote="Pendapatku mengenai Divya Peashy, orangnya asik, lucu, ketika diajak ngobrol serius, bisa serius gitu. Asik dah pokoknya. Sekali lagi, happy birthday dipi, selamat ulang tahun. Semoga semua yang diinginkan bakal tercapai, jaga kesehatan selalu dan sehat selalu. Tetep semangat ya.">
+            <span class="q-card-name">Inal</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="9" data-audio="assets/audio/10.mp3" data-quote="Ekhem... Divya Peashy.. Hmmm. Divya Peashy perkembangannya sangat baik-baik, sangat bagus, dari yang... awalnya mentalnya bisa dibilang kaya, haduh.... gak tau dah, ni anak, kaya.. mulutnya kaya... bocil. Terus sekarang sudah sebesar ini, dalam artian mentalnya ya, bukan yang lain-lainnya yang besar. Tapi gua sebagai, pernah menjadi editor kesayangan lu, bangga sama lu, sampai di titik ini bahkan. Hmmmm.... Keren lah. Melewati semua rintangan, bareng-bareng saat itu juga, seru-seruan, gokil-gokilan, sampe ada... ya sesi-sesi menangis dan sedihnya juga lu kan... gua tau. Tapi satu hal untuk Divya Peashy, lu orangnya gokil abis, gokil. Yang penting sekarang tuh semangat dan jaga selalu kesehatan aja sih. Itu aja sih, sekian dari editor kesayangan lu. Thank you.">
+            <span class="q-card-name">Gary</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="10" data-audio="assets/audio/11.mp3" data-quote="Haloo teman-teman dari Indonesia. &quot;Makasih Master&quot;. Nama aku Maverick. Hari ini adalah, hari dimana pacarku dipi ulang tahun. Selamaaat. Pacarku dipi, saya menghadiahkan gambar yang paling lucu dan bagus ini. Kita udah jarang ngobrol nih, kapan-kapan kita ngobrol lagi ya. See you again.">
+            <span class="q-card-name">Maverick</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="11" data-audio="assets/audio/12.mp3" data-quote="Tanjyobi omedetto, selamat ulang tahun dip. Gua cuman mau bilang terima kasih ke lu dan gua gak akan pernah berhenti bilang terima kasih ke lu ya. Karena selama ini lu udah ngerubah gua dalam hal yang positif. Selama 2 tahun udah nemenin gua entah dari konten lu, ketawa lu, gimmik lu, jadi setiap ngeliat lu tuh bawaannya bahagia gitu. Makanya gua sangat berterima kasih buat lu. Justru gua yang mau minta maaf buat lu kalo gua tuh gak bisa ngasih banyak kebahagiaan buat lu, gitu loh dip. Ok, jadi gitu aja, tetap semangat ya dip, terus maju dan pantang menyerah pokoknya. OK.">
+            <span class="q-card-name">Ayahito</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="12" data-audio="assets/audio/13.mp3" data-quote="Halo dip, akhirnya sudah 2 tahun dipi streaming jadi VTuber ya. VTuber PC atau Personal Computer yang pemikiran, pembawaan serta topik pesan selama stream yang menurut gua relate dengan diri gue. Dan itulah salah satu kenapa gua masih nonton lu sampe sekarang dip. Gua berharap lu tetep semangat streamnya ya, walaupun kadang ada kondisi yang... untuk semangat itu sulit, tapi gua yakin lu pasti bisa. Gila banget. Happy birthday Divya Peashy, wish you all the best dan rezeki terbuka selebar-lebarnya buat lu, dan sehat selalu, Aamiin. Itu aja dari gue dip, Alverus Alpha seorang viewer lu. CIAO.">
+            <span class="q-card-name">Alverus</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="13" data-audio="assets/audio/14.mp3" data-quote="Anjaaayy, hepibesdey Piaa. Ya semoga dipi selalu sehat, selalu dalam lindungan tuhan, rezeki diperlancar, dijauhkan dari hal-hal yang tidak diinginkan, dan panjang umur. Aamiin. Dipi bagi gua itu, orangnya baik, seru, setiap gua becandain itu, dia selalu marah-marah, reaksinya lucu. Tapi dipi itu bisa dibilang adalah mood booster gua. Gua kalo lagi bad mood gitu kan, gua nonton dia. Dipi juga bisa dibilang orang yang bikin gua semangat untuk jauh lebih hidup. Gua ngedit itu gara-gara dipi, gua... perhatiin pola hidup gua gara-gara dipi. Dipi olahraga ya gua olahraga. Pokoknya... gua tuh jadi lebih sering buat merhatiin pola hidup gua gitu. Ya walaupun pola makan gua masih acak-acakan tapi yaudah lah ya. Yang bikin gua jadi lebih hidup dari sebelumnya itu ketika gua nonton konten-konten lu gitu, gua nonton live stream lu gitu, gua jadi pengen... clip-clip gitu kan, setiap moment-moment lu. Sekali lagi, happy birthday dipi, tanjyobi omedetto, wish you all the best.">
+            <span class="q-card-name">Kamado</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="14" data-audio="assets/audio/15.mp3" data-quote="Halo dip. Sebenernya gua gak tau mau ngomong apa nih ya, tapi seriusan dulu gua gak pernah nonton kaya VTuber dari awal stream sampe end stream gitu. Gua cuman nonton tu kaya dari... clip-clip short dan lain-lain. Tapi tiba-tiba kaya elu, tiba-tiba nongol di branda gua gitu, dan akhir-akhirnya coba-coba nonton, coba-coba ikut-ikutan, coba-coba... nimbrung disitu di live, akhirnya keterusan sampe sekarang. Dan yaa gua gak tau sih mau ngomong apa, tapi buat lu semoga lu makin sukses, semoga channelnya makin naik dan.. makin banyak yang nonton dan... semoga lu makin apa ya? Ehh, itulah, dan buat temen-temen yang udah nonton dipi makasih banget udah... support dipi, mau bantu... mau banyakin donothon, ramein live dipi DLL. Sekali lagi makasih, dan buat dipi selamat ulang tahun yang ke 2. Udah itu aja dari gua, thank you.">
+            <span class="q-card-name">Joxs</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="15" data-audio="assets/audio/16.mp3" data-quote="Yo halo, pagi, siang, sore. Aku Epsilon. Pendapatku tentang dipi ya, buat aku sih dipi spesial sih, karena dia VTuber pertama buat aku. Pastinya berkesan, dari orangnya yang ceplas-ceplos, apa adanya, gak dibuat-buat, dan yang paling penting aku salut sih dari masa lalunya yang dia hadapin, itu bisa jadi pelajaran yang penting buat viewers, terutama buat aku sih. Hebat kamu dip, kuat sampe sekarang. Makasih dip udah bertahan sampe sekarang, selanjutnya tetep kuat, tetep jalani hari-hari kamu dip. Selamat ulang tahun, aku harap kita bisa temenan, bahkan kita bisa sahabatan di real life, bisa merayakan hari-hari spesial bareng dan yang lain: mail, joxs, abangku nuru, resiter, dan yang lain-lain pokonya. Itu aja, maaf sih suaraku mengganggu pendengaran kalian, cuman mas-mas jawa medok. Thank you.">
+            <span class="q-card-name">Epsilon</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="16" data-audio="assets/audio/17.mp3" data-quote="Halo dipi, izin memperkenalkan diri nama saya Abyan. Saya disini ingin mengucapkan terima kasih atas semua yang telah kamu lakukan, maupun itu konten, live stream ataupun donothon. Saya, jujur saja bisa terhibur dari... konten yang kamu berikan disaat saya tidak bisa mood. You are a hero for me because you can make me forgot all about my problem in my life, so thanks once again. Gak bisa bahasa inggris. Makasih juga buat jaketnya, saya tidak bisa berkata apa-apa, sorry juga gak bisa bikin kata-kata disaat menang jaketnya, jujur saya speachless disana dan... ya begitulah. Sorry kalau selama ini saya banyak salah dan tidak sopan, maupun dari chat atau pun dari perlakuan saya, saya tidak bermaksud, saya tidak bermaksud seperti itu, jadi ya, thanks dip. Happy pirpday Pibi- Happy Birthday.">
+            <span class="q-card-name">Abyan</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="17" data-audio="assets/audio/18.mp3" data-quote="Happy Birthday Dipiii. Hmm. dipi itu, pandangan aku ke dipi ya hhmmm, dipi itu dia... baik banget sih, anaknya asik banget, anaknya itu, diajak bercanda itu nyambung banget. Dia itu anaknya hardworker banget, totalitas deh ke viewersnya, suka belajar hal-hal baru gitu, terus mencoba. Kaya dulu waktu buat Vroid sangat hardworker banget, sangat ingin tahu gimana cara buatnya. Waktu... main valo itu juga dia, pengen banget rasanya dia pengen bisa main valo gitu untuk entertaint kalian semua. Dia itu anaknya yang sangat-sangat hardworker, gimana caranya untuk dia bisa menghibur kalian, terus maju juga. Paling itu sih pandangan aku ke dipi, dipi tuh anaknya seru banget sih. 10/10 sih hahaha.">
+            <span class="q-card-name">Ryota Stewart</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="18" data-audio="assets/audio/19.mp3" data-quote="Hmm, yaa, dipi. Makin tua aja lu hahaha, wah canda pi canda peaceee, peacee dipi peaceeee. Ok, dipi sayangku, selamat ulang tahun, happy birthday for you. Semoga kedepannya makin cantik, makin lancar semuanya, bahkan moodnya semoga, makin bahagia, ya gak si. Telus, semoga semoga semoga makin disayang sama master-masternya, semoga makin sukses, intinya mah nya. Terus semoga kita makin deket juga sih, makasih udah mau jadi temen aku dan... hmmmm apalagi ya? Itu aja kali ya, udah. Mungkin itu aja dari aku ya, wish you all the best, eh... iya, wish you all the best dipi. Thank youuu dadahhh, bay bay, emmuuacchh.">
+            <span class="q-card-name">Obelia Larasati</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="19" data-audio="assets/audio/20.mp3" data-quote="Happy birthday dipi, wish you all the best, emuachh.">
+            <span class="q-card-name">KRRN Rin</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="20" data-audio="assets/audio/21.mp3" data-quote="A a tes tes, masuk kan ya suaranya? Ada yang lagi ulang tahuuunn, ada yang nambah tua, siapa niiihh? Halo dipiiii, halooooo. BTW buat yang blom kenal, halo semuanya nama aku Katya Felicia, putri kucing yang menjelma menjadi idol keliling dari ASPIRA Project, yoroshiku onegaishimasu. Selamat ulang tahun kamu dipiii, semogaaaa sehat selalu, semoga sukses, semoga yang kamu inginkan tercapai, semogaa yang disemogakan semua orang yang baik-baik aja ya, yang baik-baik semoga terkabul, Aaamiiinn. BTW dipi aku lagi nggak bawa apa-apa nih, kamu mau hadiah apa? Kalo aku nyanyiin sedikit mau nggak? Aku nyanyi sedikit aja ya, short version nih. &quot;Happy Birthday&quot; ok. Happy birthday to you~ Happy birthday to you~ Happy birthday dear dipiii~ Happy birthday~ To youuu~ Eh kita udah lama gak collab BTW, kita udah lama gak collab, terus terus, terakhir kita ketemu pas karaoke gak sih? Ayo kita karaoke lagi, aku kangen sama kamu. Aaduuuhh. Yaudah deh ntar calling-calling aku aja ya, kalo misalkan mau ngajak collab, ehh. Yaudah kayanya dari aku itu aja ya, biar nggak kelamaan dan biar yang lain juga dapet giliran. Sekali lagi happy birthday buat kamu dipi, makasih udah ngundang aku ya, sukses selalu beb, babaaayyy, emmmmuuaahh.">
+            <span class="q-card-name">Katya Felicia</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+
+          <button class="q-card" data-idx="21" data-audio="assets/audio/22.mp3" data-quote="Hai kak dipii, selamat ulang tahun ya. Semoga panjang umur, sehat selalu, murah rezeki, terus dilancarin apa yang diinginin, semoga bisa terus berkarya jadi VTuber, dapet temen-temen yang baik, terus viewersnya nurut. Aku nyanyiin aja deh, lagu ulang tahun buat kak dipia. Selamat ulang tahun~ Selamat ulang tahun~ Selamat ulang tahun kak dipi~ Semoga panjang umur~ Nggak ada lilinnya, kalo lilinnya ditiup, ntar viewernya jadi babi. Ok kak dipi, Happy Birthday, babaaayyy.">
+            <span class="q-card-name">Mahiru Rui</span>
+            <span class="eq q-card-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BIOSKOP ========== -->
+    <section id="bioskop" class="panel cinema-panel" data-fx="curtain">
+    <div class="doodles" aria-hidden="true">
+      <i class="d" style="--m:var(--i-code);--x:90%;--y:6%;--s:110px;--r:10deg;--t:9s"></i>
+      <i class="d" style="--m:var(--i-mouse);--x:2%;--y:4%;--s:90px;--r:-14deg;--t:8s"></i>
+      <i class="d" style="--m:var(--i-cursor);--x:76%;--y:84%;--s:80px;--r:12deg;--t:7s"></i>
+      <i class="d" style="--m:var(--i-chip);--x:50%;--y:2%;--s:56px;--r:0deg;--t:5s"></i>
+      <i class="d" style="--m:var(--i-power);--x:96%;--y:52%;--s:64px;--r:-10deg;--t:6s"></i>
+      <i class="d" style="--m:var(--i-floppy);--x:30%;--y:88%;--s:70px;--r:8deg;--t:8s"></i>
+    </div>
+      <div class="wrap cinema-inner">
+        <figure class="cine-photo">
+          <img src="assets/images/umbrella-peace.png" alt="Gadis berpayung merah dengan sweater jingga" loading="lazy">
+        </figure>
+
+        <header class="sec-head">
+          <span class="sec-num">Bagian II</span>
+          <h2 class="sec-title">Bioskop <em>memori</em></h2>
+        </header>
+
+        <div class="videos-grid" id="vGrid">
+          <article class="v-card reveal">
+            <div class="v-embed">
+              <iframe src="https://www.youtube.com/embed/A36SBcgmjRo?si=AkRHpyhCll3pCDzU" title="Memori I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="label">Gulungan I — Ref A36SB</p>
+            <h3 class="v-caption">Langkah awal &amp; nyanyian senja</h3>
+            <p class="v-desc">Rekaman visual saat detik pertama cerita dirajut bersama.</p>
+          </article>
+
+          <article class="v-card reveal" data-delay="1">
+            <div class="v-embed">
+              <iframe src="https://www.youtube.com/embed/AEoiE3FU9Xk?si=fTneF9kdpM6X4JD4" title="Memori II" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <p class="label">Gulungan II — Ref AEoiE</p>
+            <h3 class="v-caption">Harmoni cerita &amp; senyuman</h3>
+            <p class="v-desc">Alunan hangat yang menyatukan setiap kepingan momen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GALERI FANART ========== -->
+    <section id="galeri" class="panel gallery-panel" data-fx="rise">
+    <div class="doodles" aria-hidden="true">
+      <i class="d" style="--m:var(--i-gamepad);--x:38%;--y:3%;--s:110px;--r:-10deg;--t:9s"></i>
+      <i class="d" style="--m:var(--i-monitor);--x:56%;--y:6%;--s:120px;--r:0deg;--t:12s;--c:#A394FF"></i>
+      <i class="d" style="--m:var(--i-fan);--x:94%;--y:60%;--s:110px;--r:14deg;--t:10s"></i>
+      <i class="d" style="--m:var(--i-power);--x:4%;--y:76%;--s:80px;--r:10deg;--t:7s;--c:#BC0202"></i>
+      <i class="d" style="--m:var(--i-cursor);--x:40%;--y:90%;--s:60px;--r:-6deg;--t:6s"></i>
+      <i class="d" style="--m:var(--i-chip);--x:70%;--y:40%;--s:46px;--r:0deg;--t:5s;--c:#FF8A5B"></i>
+    </div>
+      <div class="wrap">
+        <header class="sec-head gallery-head">
+          <span class="sec-num">Bagian III</span>
+          <h2 class="sec-title">Galeri <em>fanart</em></h2>
+          <a href="#hero" class="btn btn-secondary">Kembali ke atas ↑</a>
+        </header>
+
+        <div class="gallery" id="gallery">
+          <button class="g-item" style="--i:0" data-cap="Tanda hati">
+            <img src="assets/fanart/fanart-1.webp" alt="Dipi membentuk hati dengan kedua tangan" loading="lazy">
+            <span class="g-cap">Tanda hati</span>
+          </button>
+          <button class="g-item g-wide" style="--i:1" data-cap="Kupu-kupu merah">
+            <img src="assets/fanart/fanart-2.jpg" alt="Dipi dan kupu-kupu merah yang bercahaya" loading="lazy">
+            <span class="g-cap">Kupu-kupu merah</span>
+          </button>
+          <button class="g-item g-tall" style="--i:2" data-cap="Payung & jaket jingga">
+            <img src="assets/fanart/fanart-3.jpg" alt="Dipi berjaket jingga memanggul payung merah" loading="lazy">
+            <span class="g-cap">Payung & jaket jingga</span>
+          </button>
+          <button class="g-item" style="--i:3" data-cap="Hepibedey Tuyu">
+            <img src="assets/fanart/fanart-4.jpg" alt="Dipi berambut hijau dengan syal merah di bawah langit biru" loading="lazy">
+            <span class="g-cap">Hepibedey Tuyu</span>
+          </button>
+          <button class="g-item" style="--i:4" data-cap="Finger heart">
+            <img src="assets/fanart/fanart-5.jpg" alt="Dipi membuat finger heart dengan jaket jingga" loading="lazy">
+            <span class="g-cap">Finger heart</span>
+          </button>
+          <button class="g-item" style="--i:5" data-cap="Aku juga mau">
+            <img src="assets/fanart/fanart-6.webp" alt="Dipi berambut hijau memegang kotak hati" loading="lazy">
+            <span class="g-cap">Aku juga mau</span>
+          </button>
+          <button class="g-item" style="--i:6" data-cap="Senyum di balik payung">
+            <img src="assets/fanart/fanart-7.webp" alt="Dipi berpayung merah memberi tanda damai" loading="lazy">
+            <span class="g-cap">Senyum di balik payung</span>
+          </button>
+          <button class="g-item" style="--i:7" data-cap="Seragam maid">
+            <img src="assets/fanart/fanart-8.webp" alt="Dipi berambut hijau dengan seragam maid" loading="lazy">
+            <span class="g-cap">Seragam maid</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== LIGHTBOX ========== -->
+  <dialog class="g-lightbox" id="gLightbox" aria-label="Fanart">
+    <figure class="g-lb-figure">
+      <img id="gImg" alt="">
+      <figcaption><span id="gCap"></span><span class="g-lb-count" id="gCount"></span></figcaption>
+    </figure>
+    <button class="g-lb-btn g-lb-prev" id="gPrev" aria-label="Fanart sebelumnya">←</button>
+    <button class="g-lb-btn g-lb-next" id="gNext" aria-label="Fanart selanjutnya">→</button>
+    <button class="g-lb-btn g-lb-close" id="gClose" aria-label="Tutup">Tutup</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
