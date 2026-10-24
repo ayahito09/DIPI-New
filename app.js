@@ -496,6 +496,10 @@ function initAudio() {
     }
   });
 
+  // Hero "Putar musik" button: an explicit start for when the browser blocks autoplay
+  const heroPlay = document.getElementById('heroPlay');
+  heroPlay?.addEventListener('click', () => { userPaused = false; play(); });
+
   // Immediate autoplay attempt
   play();
 
@@ -503,7 +507,7 @@ function initAudio() {
   // and keep listening until play() actually succeeds
   function onFirstGesture(e) {
     // The music button handles its own click; starting here too made that click start then pause the music
-    if (btn.contains(e.target)) return;
+    if (btn.contains(e.target) || heroPlay?.contains(e.target)) return;
     if (!isPlaying && !userPaused) play();
   }
   gestureEvents.forEach((ev) => window.addEventListener(ev, onFirstGesture, { capture: true, passive: true }));

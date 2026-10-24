@@ -670,3 +670,7 @@ html.deck .hero { overflow: hidden; }
 .hero-title { white-space: nowrap; }
 .hero-title em { white-space: nowrap; }
 @media (max-width: 960px) { .hero-title em { display: block; } }
+
+/* Hero "play music" button: rises after the subtitle, fades away once the music is on */
+.hero-play { margin-top: 1.75rem; animation: rise 800ms var(--ease) 1600ms both; transition: opacity 500ms var(--ease), visibility 500ms; }
+body:has(#btnAudio[aria-pressed="true"]) .hero-play { opacity: 0; visibility: hidden; }
