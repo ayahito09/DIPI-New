@@ -318,6 +318,9 @@ em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accen
   border-radius: var(--r-lg);
   background: #fff;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   scrollbar-width: thin;
 }
 /* JS sets --qs from the wish's length so short and long wishes both fill the tile */
@@ -369,7 +372,12 @@ em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accen
 @media (max-width: 760px) {
   .quote-bento { display: flex; flex-direction: column; height: auto; }
   .q-photo { display: none; }
-  .q-feature { height: 52dvh; }
+  .q-feature {
+    height: 52dvh;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
   /* Long wishes scroll inside the tile; the play button stays pinned at its bottom edge */
   .q-voice { position: sticky; bottom: 0; background: #fff; padding-block: 0.5rem; margin-bottom: -0.5rem; }
   .q-list { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.5rem; }

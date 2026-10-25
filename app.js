@@ -255,6 +255,16 @@ function initSectionScroll() {
 
   window.addEventListener('wheel', (e) => {
     if (!enabled || e.ctrlKey || lightboxOpen()) return;
+    const qFeature = e.target.closest('#qFeature');
+    if (qFeature) {
+      const dir = e.deltaY > 0 ? 1 : -1;
+      const canScrollQ = dir > 0
+        ? qFeature.scrollTop + qFeature.clientHeight < qFeature.scrollHeight - 1
+        : qFeature.scrollTop > 1;
+      if (canScrollQ) return; // allow quote box to scroll its own text
+      e.preventDefault(); // do not scroll or switch outer section
+      return;
+    }
     const dir = e.deltaY > 0 ? 1 : -1;
     if (canScroll(dir)) return; // let the section scroll itself first
     e.preventDefault();
@@ -272,19 +282,26 @@ function initSectionScroll() {
   });
 
   // Touch swipe
-  // A swipe changes section only if the section was already at that edge when the touch began
-  let ty = null, edgeUp = false, edgeDown = false;
+  // A swipe changes section only if the section was already at that edge when the touch began.
+  // Scrolling inside the quotes area (#qFeature) is isolated so the section does not scroll or switch.
+  let ty = null, edgeUp = false, edgeDown = false, touchInQuote = false;
   window.addEventListener('touchstart', (e) => {
+    touchInQuote = !!e.target.closest('#qFeature');
     ty = e.touches[0].clientY;
     edgeUp = !canScroll(1);   // nothing more below: swiping up goes forward
     edgeDown = !canScroll(-1); // nothing more above: swiping down goes back
   }, { passive: true });
   window.addEventListener('touchend', (e) => {
-    if (!enabled || ty === null || lightboxOpen()) return;
+    if (!enabled || ty === null || lightboxOpen() || touchInQuote) {
+      ty = null;
+      touchInQuote = false;
+      return;
+    }
     const dy = ty - e.changedTouches[0].clientY;
     if (dy > 50 && edgeUp) go(cur + 1);
     else if (dy < -50 && edgeDown) go(cur - 1);
     ty = null;
+    touchInQuote = false;
   });
 
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -314,6 +331,7 @@ function initQuotes() {
   // While a clip plays the 3s carousel timer is paused (CSS .is-voice); when it ends the carousel moves on.
   const voice = new Audio();
   voice.preload = 'none';
+  voice.volume = 1; // Full volume output (voice clips amplified +40% for crisp clarity)
   const btn = document.getElementById('qPlay');
   const label = document.getElementById('qPlayLabel');
   const bar = document.getElementById('qBar');
@@ -373,12 +391,35 @@ function initQuotes() {
     c.style.setProperty('--i', i);
     c.addEventListener('click', () => focus(i));
   });
+
+  // On mobile/touch: keep scrolling contained inside quotes feature so outer section never scrolls with it
+  let qTouchStartY = 0;
+  feature.addEventListener('touchstart', (e) => {
+    qTouchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  feature.addEventListener('touchmove', (e) => {
+    if (!e.touches.length) return;
+    const currentY = e.touches[0].clientY;
+    const dy = currentY - qTouchStartY;
+    const isScrollingDown = dy < 0; // finger drag up -> text scroll down
+    const isScrollingUp = dy > 0;   // finger drag down -> text scroll up
+    const isAtTop = feature.scrollTop <= 0;
+    const isAtBottom = feature.scrollTop + feature.clientHeight >= feature.scrollHeight - 1;
+
+    // Prevent parent section/panel from scrolling when reaching boundaries of quote text
+    if ((isScrollingDown && isAtBottom) || (isScrollingUp && isAtTop)) {
+      if (e.cancelable) e.preventDefault();
+    }
+    e.stopPropagation();
+  }, { passive: false });
+
   focus(0);
 }
 
 /* ==========================================================================
    AUDIO BACKGROUND (Nadhif Basalamah - Penjaga Hati)
-   Crop: 03:06 - 04:20, Volume: 60%, Autoplay with smooth fade-in/fade-out
+   Crop: 03:06 - 04:20, Volume: 48% (reduced ~20%), Autoplay with smooth fade-in/fade-out
    ========================================================================== */
 function initAudio() {
   const btn = document.getElementById('btnAudio');
@@ -396,7 +437,7 @@ function initAudio() {
     }
   });
 
-  const TARGET_VOL = 0.60;
+  const TARGET_VOL = 0.48; // reduced by 20% from 0.60
   const FADE_IN_MS = 2000;
   const FADE_OUT_MS = 1200;
   const CROP_START = 186; // 3:06
