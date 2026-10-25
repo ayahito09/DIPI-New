@@ -438,9 +438,7 @@ function initAudio() {
       title: 'Penjaga Hati',
       artist: 'Nadhif Basalamah',
       src: 'assets/audio/penjaga-hati.mp3',
-      fallback: 'nadhif basalamah - penjaga hati (Official Lyric Video).mp3',
-      cropStart: 186, // 3:06
-      cropEnd: 260    // 4:20
+      fallback: 'nadhif basalamah - penjaga hati (Official Lyric Video).mp3'
     },
     {
       title: 'Fiction',
@@ -459,14 +457,17 @@ function initAudio() {
   ];
 
   let curTrack = 0;
+  let fallbackAttempted = false;
+  let trackSwitchTimer = null;
   const audio = document.getElementById('bgAudio') || new Audio(playlist[0].src);
   audio.loop = false; // Playlist auto-advances to the next song
-  audio.preload = 'auto';
+  audio.preload = 'metadata';
 
   // Fallback to root or alternative file if assets path fails
   audio.addEventListener('error', () => {
     const track = playlist[curTrack];
-    if (track.fallback && !audio.src.includes(encodeURI(track.fallback)) && !audio.src.includes(track.fallback)) {
+    if (!fallbackAttempted && track.fallback && !audio.src.includes(encodeURI(track.fallback)) && !audio.src.includes(track.fallback)) {
+      fallbackAttempted = true;
       audio.src = track.fallback;
       audio.load();
       if (isPlaying) {
@@ -515,6 +516,10 @@ function initAudio() {
 
   // Timer, not rAF: rAF stalls in background tabs and would leave the music stuck at volume 0
   function setVolumeSmooth(target, duration, onComplete) {
+    if (volumeLocked) {
+      if (onComplete) onComplete();
+      return;
+    }
     if (fadeAnimId) clearInterval(fadeAnimId);
     const startVol = audio.volume;
     const startTime = performance.now();
@@ -532,17 +537,18 @@ function initAudio() {
     }, 30);
   }
 
-  // Crop / boundary handling for tracks
+  // Crop / boundary handling for tracks (safe on iOS Safari)
   function enforceTrackBounds() {
     const track = playlist[curTrack];
-    if (track.cropStart && audio.duration && audio.duration > 200) {
-      if (audio.currentTime >= track.cropEnd) {
-        nextTrack(true);
-        return;
-      }
-      if (audio.currentTime < track.cropStart) {
+    if (!track.cropStart || !audio.duration || audio.duration <= 200) return;
+    if (track.cropEnd && audio.currentTime >= track.cropEnd) {
+      nextTrack(true);
+      return;
+    }
+    if (audio.currentTime < track.cropStart && audio.readyState >= 2 && audio.seekable && audio.seekable.length > 0) {
+      try {
         audio.currentTime = track.cropStart;
-      }
+      } catch (e) {}
     }
   }
 
@@ -551,21 +557,20 @@ function initAudio() {
     if (isPlaying) enforceTrackBounds();
   });
 
-  // When current track finishes naturally, advance to next track
+  // When current track finishes naturally, advance to next track (debounced to avoid iOS false-ended triggers)
   audio.addEventListener('ended', () => {
-    nextTrack(true);
+    if (trackSwitchTimer) clearTimeout(trackSwitchTimer);
+    trackSwitchTimer = setTimeout(() => {
+      nextTrack(true);
+    }, 200);
   });
 
   function loadTrack(idx, shouldPlay = true) {
+    fallbackAttempted = false;
     curTrack = (idx + playlist.length) % playlist.length;
     const track = playlist[curTrack];
     audio.src = track.src;
     audio.load();
-    if (track.cropStart && audio.duration && audio.duration > 200) {
-      audio.currentTime = track.cropStart;
-    } else {
-      audio.currentTime = 0;
-    }
     updateTrackUI();
     if (shouldPlay) {
       userPaused = false;
@@ -574,12 +579,12 @@ function initAudio() {
   }
 
   function nextTrack(autoPlay = true) {
-    if (isPlaying) {
+    if (isPlaying && !volumeLocked) {
       setVolumeSmooth(0, 300, () => {
         loadTrack(curTrack + 1, autoPlay);
       });
     } else {
-      loadTrack(curTrack + 1, false);
+      loadTrack(curTrack + 1, autoPlay && isPlaying);
     }
   }
 
@@ -589,11 +594,11 @@ function initAudio() {
     const elapsed = audio.currentTime - offset;
     // If played more than 3 seconds, restart current track; otherwise go to previous
     if (elapsed > 3) {
-      audio.currentTime = offset;
+      try { audio.currentTime = offset; } catch (e) {}
       if (!isPlaying) play();
       return;
     }
-    if (isPlaying) {
+    if (isPlaying && !volumeLocked) {
       setVolumeSmooth(0, 300, () => {
         loadTrack(curTrack - 1, true);
       });
@@ -608,11 +613,15 @@ function initAudio() {
     isPlaying = true;
     btn.setAttribute('aria-pressed', 'true');
     updateTrackUI();
-    audio.volume = 0;
+    if (!volumeLocked) {
+      try { audio.volume = 0; } catch (e) {}
+    }
     const p = audio.play();
     if (p !== undefined) {
       p.then(() => {
-        retarget(FADE_IN_MS);
+        if (!volumeLocked) {
+          retarget(FADE_IN_MS);
+        }
         gestureEvents.forEach((ev) => window.removeEventListener(ev, onFirstGesture, { capture: true }));
       }).catch(() => {
         // Autoplay blocked by browser policy without user gesture
