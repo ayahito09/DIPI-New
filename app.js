@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuotes();
   initGallery();
   initAudio();
+  initSectionIndicator();
 });
 
 /* ==========================================================================
@@ -227,6 +228,7 @@ function initSectionScroll() {
     window.scrollTo({ top: 0, behavior: 'instant' });
     stops.forEach((s, i) => { s.classList.toggle('is-current', i === cur); showReveals(s, i === cur); });
     root.style.setProperty('--p', cur / (stops.length - 1));
+    document.dispatchEvent(new CustomEvent('deckchange', { detail: { from: cur, to: cur } }));
   }
 
   setDeck(true);
@@ -238,7 +240,7 @@ function initSectionScroll() {
     busy = true;
     showReveals(from, false);
     from.classList.add('is-leaving');
-    document.dispatchEvent(new Event('deckchange'));
+    document.dispatchEvent(new CustomEvent('deckchange', { detail: { from: cur, to } }));
     // Arrive at the edge you came from (clipped sections like the hero never offset)
     next.scrollTop = to < cur && getComputedStyle(next).overflowY === 'auto' ? next.scrollHeight : 0;
     next.classList.add('is-current', `fx-${next.dataset.fx || 'rise'}`);
@@ -252,6 +254,7 @@ function initSectionScroll() {
       busy = false;
     }, DUR);
   }
+  window.__deckGo = go;
 
   window.addEventListener('wheel', (e) => {
     if (!enabled || e.ctrlKey || lightboxOpen()) return;
@@ -370,9 +373,6 @@ function initQuotes() {
     const quote = card.dataset.quote;
     text.textContent = quote;
     name.textContent = card.textContent.trim();
-    // Short wishes set large, long ones (up to ~1400 chars) small enough to fit
-    const size = Math.max(1.05, Math.min(2.4, 2.4 - (quote.length - 120) / 600));
-    feature.style.setProperty('--qs', `${size.toFixed(2)}rem`);
     feature.scrollTop = 0;
     if (!reduceMotion) {
       text.animate([{ opacity: 0, translate: '0 16px', filter: 'blur(6px)' }, { opacity: 1, translate: '0 0', filter: 'blur(0)' }], { duration: 600, easing: 'cubic-bezier(.22,1,.36,1)' });
@@ -418,30 +418,66 @@ function initQuotes() {
 }
 
 /* ==========================================================================
-   AUDIO BACKGROUND (Nadhif Basalamah - Penjaga Hati)
-   Crop: 03:06 - 04:20, Volume: 48% (reduced ~20%), Autoplay with smooth fade-in/fade-out
+   AUDIO BACKGROUND & PLAYLIST
+   Tracks:
+   1. Penjaga Hati - Nadhif Basalamah (Crop: 03:06 - 04:20)
+   2. Fiction (Sumika) - Divya Peashy (Birthday Cover Song)
+   3. Memory - Divya Peashy (Original Song)
+   Controls: Prev, Play/Pause, Next, smooth fading, cinema & voice ducking
    ========================================================================== */
 function initAudio() {
+  const player = document.getElementById('audioPlayer');
   const btn = document.getElementById('btnAudio');
+  const btnPrev = document.getElementById('btnAudioPrev');
+  const btnNext = document.getElementById('btnAudioNext');
+  const label = document.getElementById('audioLabel');
   if (!btn) return;
 
-  const audio = document.getElementById('bgAudio') || new Audio('assets/audio/penjaga-hati.mp3');
-  audio.loop = true;
+  const playlist = [
+    {
+      title: 'Penjaga Hati',
+      artist: 'Nadhif Basalamah',
+      src: 'assets/audio/penjaga-hati.mp3',
+      fallback: 'nadhif basalamah - penjaga hati (Official Lyric Video).mp3',
+      cropStart: 186, // 3:06
+      cropEnd: 260    // 4:20
+    },
+    {
+      title: 'Fiction',
+      subtitle: 'Cover',
+      artist: 'Divya Peashy',
+      src: 'assets/audio/fiction-sumika.mp3',
+      fallback: '【Birthday Cover Song】Fiction - Sumika by Divya Peashy.mp3'
+    },
+    {
+      title: 'Memory',
+      subtitle: 'Original Song',
+      artist: 'Divya Peashy',
+      src: 'assets/audio/memory.mp3',
+      fallback: '【Original Song】 Memory - Divya Peashy.mp3'
+    }
+  ];
+
+  let curTrack = 0;
+  const audio = document.getElementById('bgAudio') || new Audio(playlist[0].src);
+  audio.loop = false; // Playlist auto-advances to the next song
   audio.preload = 'auto';
 
-  // Fallback to full root file if assets path fails
+  // Fallback to root or alternative file if assets path fails
   audio.addEventListener('error', () => {
-    if (!audio.src.includes('Official')) {
-      audio.src = 'nadhif basalamah - penjaga hati (Official Lyric Video).mp3';
+    const track = playlist[curTrack];
+    if (track.fallback && !audio.src.includes(encodeURI(track.fallback)) && !audio.src.includes(track.fallback)) {
+      audio.src = track.fallback;
       audio.load();
+      if (isPlaying) {
+        audio.play().catch(() => {});
+      }
     }
   });
 
   const TARGET_VOL = 0.48; // reduced by 20% from 0.60
   const FADE_IN_MS = 2000;
   const FADE_OUT_MS = 1200;
-  const CROP_START = 186; // 3:06
-  const CROP_END = 260;   // 4:20
 
   let isPlaying = false;
   let userPaused = false;
@@ -449,11 +485,21 @@ function initAudio() {
   let voiceOn = false; // a quote's voice clip is playing: music ducks to 20%
   const gestureEvents = ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'];
 
+  function updateTrackUI() {
+    const track = playlist[curTrack];
+    if (label) {
+      label.textContent = track.title;
+      label.title = `${track.title} — ${track.artist}${track.subtitle ? ` (${track.subtitle})` : ''}`;
+    }
+    btn.setAttribute('aria-label', `${isPlaying ? 'Jeda' : 'Putar'} lagu ${track.title} oleh ${track.artist}`);
+  }
+
   // Target volume from the current state: cinema dims it, a quote's voice ducks it
   function retarget(ms) {
     const base = document.body.classList.contains('cinema-on') ? 0.08 : TARGET_VOL;
     setVolumeSmooth(voiceOn ? base * 0.2 : base, ms);
   }
+
   document.addEventListener('voice', (e) => {
     if (voiceOn === e.detail) return;
     voiceOn = e.detail;
@@ -486,25 +532,82 @@ function initAudio() {
     }, 30);
   }
 
-  // Only seek/clamp if playing the uncropped full original track (duration > 200s)
-  function enforceFullTrackCrop() {
-    if (audio.duration && audio.duration > 200) {
-      if (audio.currentTime < CROP_START || audio.currentTime >= CROP_END) {
-        audio.currentTime = CROP_START;
+  // Crop / boundary handling for tracks
+  function enforceTrackBounds() {
+    const track = playlist[curTrack];
+    if (track.cropStart && audio.duration && audio.duration > 200) {
+      if (audio.currentTime >= track.cropEnd) {
+        nextTrack(true);
+        return;
+      }
+      if (audio.currentTime < track.cropStart) {
+        audio.currentTime = track.cropStart;
       }
     }
   }
 
-  audio.addEventListener('loadedmetadata', enforceFullTrackCrop);
+  audio.addEventListener('loadedmetadata', enforceTrackBounds);
   audio.addEventListener('timeupdate', () => {
-    if (isPlaying) enforceFullTrackCrop();
+    if (isPlaying) enforceTrackBounds();
   });
+
+  // When current track finishes naturally, advance to next track
+  audio.addEventListener('ended', () => {
+    nextTrack(true);
+  });
+
+  function loadTrack(idx, shouldPlay = true) {
+    curTrack = (idx + playlist.length) % playlist.length;
+    const track = playlist[curTrack];
+    audio.src = track.src;
+    audio.load();
+    if (track.cropStart && audio.duration && audio.duration > 200) {
+      audio.currentTime = track.cropStart;
+    } else {
+      audio.currentTime = 0;
+    }
+    updateTrackUI();
+    if (shouldPlay) {
+      userPaused = false;
+      play();
+    }
+  }
+
+  function nextTrack(autoPlay = true) {
+    if (isPlaying) {
+      setVolumeSmooth(0, 300, () => {
+        loadTrack(curTrack + 1, autoPlay);
+      });
+    } else {
+      loadTrack(curTrack + 1, false);
+    }
+  }
+
+  function prevTrack() {
+    const track = playlist[curTrack];
+    const offset = track.cropStart ? track.cropStart : 0;
+    const elapsed = audio.currentTime - offset;
+    // If played more than 3 seconds, restart current track; otherwise go to previous
+    if (elapsed > 3) {
+      audio.currentTime = offset;
+      if (!isPlaying) play();
+      return;
+    }
+    if (isPlaying) {
+      setVolumeSmooth(0, 300, () => {
+        loadTrack(curTrack - 1, true);
+      });
+    } else {
+      loadTrack(curTrack - 1, false);
+    }
+  }
 
   function play() {
     if (userPaused) return;
-    enforceFullTrackCrop();
+    enforceTrackBounds();
     isPlaying = true;
     btn.setAttribute('aria-pressed', 'true');
+    updateTrackUI();
     audio.volume = 0;
     const p = audio.play();
     if (p !== undefined) {
@@ -515,6 +618,7 @@ function initAudio() {
         // Autoplay blocked by browser policy without user gesture
         isPlaying = false;
         btn.setAttribute('aria-pressed', 'false');
+        updateTrackUI();
       });
     }
   }
@@ -523,6 +627,7 @@ function initAudio() {
     isPlaying = false;
     userPaused = true;
     btn.setAttribute('aria-pressed', 'false');
+    updateTrackUI();
     setVolumeSmooth(0, FADE_OUT_MS, () => {
       audio.pause();
     });
@@ -537,18 +642,28 @@ function initAudio() {
     }
   });
 
+  btnNext?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nextTrack(true);
+  });
+
+  btnPrev?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prevTrack();
+  });
+
   // Hero "Putar musik" button: an explicit start for when the browser blocks autoplay
   const heroPlay = document.getElementById('heroPlay');
   heroPlay?.addEventListener('click', () => { userPaused = false; play(); });
 
+  updateTrackUI();
+
   // Immediate autoplay attempt
   play();
 
-  // Autoplay blocked: retry on a gesture the browser accepts (scroll/wheel/touchstart don't count),
-  // and keep listening until play() actually succeeds
+  // Autoplay blocked: retry on a gesture the browser accepts (scroll/wheel/touchstart don't count)
   function onFirstGesture(e) {
-    // The music button handles its own click; starting here too made that click start then pause the music
-    if (btn.contains(e.target) || heroPlay?.contains(e.target)) return;
+    if (player?.contains(e.target) || heroPlay?.contains(e.target)) return;
     if (!isPlaying && !userPaused) play();
   }
   gestureEvents.forEach((ev) => window.addEventListener(ev, onFirstGesture, { capture: true, passive: true }));
@@ -610,3 +725,83 @@ function initGallery() {
     if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
   });
 }
+
+/* ==========================================================================
+   SECTION INDICATOR (compact floating pill with section counter + interactive steppers)
+   ========================================================================== */
+function initSectionIndicator() {
+  const indicator = document.getElementById('secIndicator');
+  if (!indicator) return;
+
+  const stops = [...document.querySelectorAll('.panel')];
+  const dots = [...indicator.querySelectorAll('.sec-dot')];
+  const curNum = indicator.querySelector('.sec-cur');
+  const totalNum = indicator.querySelector('.sec-total');
+  const secName = document.getElementById('secName');
+  const counter = document.getElementById('secCounter');
+
+  const names = ['Beranda', 'Ucapan', 'Bioskop', 'Galeri'];
+  const total = stops.length || 4;
+
+  if (totalNum) totalNum.textContent = String(total);
+
+  function updateIndicator(to) {
+    if (to < 0 || to >= total) return;
+
+    // Update dots
+    dots.forEach((dot, idx) => {
+      const active = idx === to;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-selected', String(active));
+      dot.setAttribute('tabindex', active ? '0' : '-1');
+    });
+
+    // Update numbers
+    if (curNum) curNum.textContent = String(to + 1);
+    else if (counter) counter.textContent = `${to + 1} / ${total}`;
+
+    // Update section name
+    if (secName) {
+      secName.textContent = names[to] || (stops[to] ? stops[to].id : '');
+    }
+
+    // Toggle light theme when in section 1 (Quotes / Ucapan)
+    indicator.classList.toggle('is-light', to === 1);
+  }
+
+  // Dot navigation click handlers
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof window.__deckGo === 'function') {
+        window.__deckGo(idx);
+      } else if (stops[idx]) {
+        stops[idx].scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Listen for deckchange custom events
+  document.addEventListener('deckchange', (e) => {
+    if (e.detail && typeof e.detail.to === 'number') {
+      updateIndicator(e.detail.to);
+    }
+  });
+
+  // Native scroll fallback / reduced motion support
+  if (reduceMotion || !document.documentElement.classList.contains('deck')) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = stops.indexOf(entry.target);
+          if (idx >= 0) updateIndicator(idx);
+        }
+      });
+    }, { threshold: 0.5 });
+    stops.forEach((s) => obs.observe(s));
+  }
+
+  // Initial update
+  updateIndicator(0);
+}
+

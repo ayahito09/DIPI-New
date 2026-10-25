@@ -79,6 +79,160 @@ html.deck .is-leaving { visibility: visible; z-index: 1; animation: recede 1100m
 @keyframes fx-rise { from { translate: 0 100%; } }
 
 .progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 950; background: var(--accent); transform: scaleX(var(--p, 0)); transform-origin: left; }
+
+/* ==========================================================================
+   COMPACT SECTION INDICATOR
+   Ultra-compact floating pill at top center (under the progress bar).
+   Never overlaps text, cards, photos, or bottom floating controls.
+   ========================================================================== */
+.sec-indicator {
+  position: fixed;
+  top: clamp(10px, 1.8vh, 18px);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  height: 28px;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  background: rgba(19, 19, 21, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); /* taste-skill-ignore */
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity 500ms var(--ease), background-color 350ms var(--ease), border-color 350ms var(--ease), color 350ms var(--ease), box-shadow 350ms var(--ease);
+}
+html.deck .sec-indicator,
+html:not(.deck) .sec-indicator { opacity: 1; }
+
+.sec-counter {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  line-height: 1;
+}
+.sec-cur { font-weight: 600; color: var(--accent); transition: color 350ms var(--ease); }
+.sec-sep { margin: 0 1.5px; opacity: 0.45; font-size: 0.7rem; }
+.sec-total { opacity: 0.65; }
+
+.sec-divider {
+  display: block;
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background-color 350ms var(--ease);
+}
+
+.sec-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sec-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+/* Generous touch target without visual clutter */
+.sec-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+.sec-dot-bar {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(243, 241, 236, 0.28);
+  transition: width 300ms var(--ease), background-color 300ms var(--ease);
+}
+.sec-dot:hover .sec-dot-bar {
+  background: rgba(243, 241, 236, 0.6);
+  width: 10px;
+}
+.sec-dot.is-active .sec-dot-bar {
+  width: 18px;
+  background: var(--accent);
+}
+
+.sec-name {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 350ms var(--ease);
+}
+
+/* Light theme adaptation (when Quotes section is active) */
+.sec-indicator.is-light,
+body:has(.quotes-panel.is-current) .sec-indicator {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(44, 38, 35, 0.14);
+  color: var(--ink);
+  box-shadow: 0 4px 14px rgba(44, 38, 35, 0.08); /* taste-skill-ignore */
+}
+.sec-indicator.is-light .sec-cur,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-cur {
+  color: #4E8A33;
+}
+.sec-indicator.is-light .sec-counter,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-counter {
+  color: var(--ink);
+}
+.sec-indicator.is-light .sec-divider,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-divider {
+  background: rgba(44, 38, 35, 0.16);
+}
+.sec-indicator.is-light .sec-dot-bar,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-dot-bar {
+  background: rgba(44, 38, 35, 0.22);
+}
+.sec-indicator.is-light .sec-dot:hover .sec-dot-bar,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-dot:hover .sec-dot-bar {
+  background: rgba(44, 38, 35, 0.55);
+}
+.sec-indicator.is-light .sec-dot.is-active .sec-dot-bar,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-dot.is-active .sec-dot-bar {
+  background: #4E8A33;
+}
+.sec-indicator.is-light .sec-name,
+body:has(.quotes-panel.is-current) .sec-indicator .sec-name {
+  color: #5C534B;
+}
+
+@media (max-width: 480px) {
+  .sec-indicator {
+    height: 26px;
+    padding: 0 0.6rem;
+    gap: 0.4rem;
+    top: 8px;
+  }
+  .sec-counter { font-size: 0.7rem; }
+  .sec-dot { width: 14px; }
+  .sec-dot.is-active .sec-dot-bar { width: 14px; }
+  .sec-name { display: none; }
+}
 body {
   background: var(--bg);
   color: var(--text);
@@ -126,35 +280,115 @@ em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accen
 .btn-ghost { background: var(--raised); color: var(--text); }
 .btn-ghost:hover { background: var(--text); color: var(--bg); }
 
+/* --- Floating Playlist Player (Full Ijo) --- */
+.audio-player--floating {
+  position: fixed;
+  bottom: 1.5rem;
+  right: var(--margin);
+  z-index: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(214, 255, 77, 0.25); /* taste-skill-ignore */
+  border: 1px solid rgba(0, 0, 0, 0.15); /* taste-skill-ignore */
+}
+
+.audio-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--accent-ink);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.audio-ctrl-btn:hover {
+  background: rgba(16, 19, 10, 0.12);
+  transform: scale(1.08);
+}
+.audio-ctrl-btn:active {
+  transform: scale(0.92);
+}
+.audio-ctrl-btn svg {
+  display: block;
+  fill: currentColor;
+}
+
 .audio-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  min-height: 40px;
-  padding: 0 1rem;
+  gap: 0.55rem;
+  min-height: 34px;
+  padding: 0 0.85rem;
   border-radius: 999px;
-  background: var(--raised);
-  font-size: 0.875rem;
-  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  border: none;
+  background: rgba(16, 19, 10, 0.08);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.audio-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.audio-btn:hover {
+  background: rgba(16, 19, 10, 0.15);
+}
+.audio-btn:active {
+  transform: scale(0.97);
+}
+.audio-btn[aria-pressed="true"] {
+  background: rgba(16, 19, 10, 0.14);
+  color: var(--accent-ink);
+}
+.audio-label {
+  display: inline-block;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
 .eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
-.eq i { width: 3px; height: 4px; background: currentColor; border-radius: 1px; }
+.eq i { width: 3px; height: 4px; background: var(--accent-ink); border-radius: 1px; }
 .audio-btn[aria-pressed="true"] .eq i { animation: eq 900ms var(--ease) infinite alternate; }
 .audio-btn[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: 150ms; }
 .audio-btn[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: 300ms; }
 @keyframes eq { to { height: 12px; } }
 
-.audio-btn--floating {
-  position: fixed;
-  bottom: 1.5rem;
-  right: var(--margin);
-  z-index: 800;
-  background: var(--raised);
-}
-
 @media (max-width: 640px) {
-  .audio-label { display: none; }
+  .audio-player--floating {
+    bottom: 1rem;
+    right: 1rem;
+    gap: 0.15rem;
+    padding: 3px;
+  }
+  .audio-ctrl-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .audio-ctrl-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .audio-btn {
+    min-height: 30px;
+    padding: 0 0.65rem;
+    gap: 0.4rem;
+  }
+  .audio-label {
+    max-width: 80px;
+    font-size: 0.78rem;
+  }
 }
 
 /* --- Panels --- */
@@ -323,8 +557,8 @@ em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accen
   touch-action: pan-y;
   scrollbar-width: thin;
 }
-/* JS sets --qs from the wish's length so short and long wishes both fill the tile */
-.q-feature-text { font-family: var(--serif); font-size: var(--qs, 2rem); line-height: 1.2; flex: 1; }
+/* All quotes share the exact same uniform typography */
+.q-feature-text { font-family: var(--serif); font-size: clamp(1.2rem, 1.8vw, 1.45rem); line-height: 1.4; flex: 1; }
 .q-feature-name { font-weight: 600; color: var(--secondary); }
 .q-feature-name::before { content: '— '; }
 
@@ -373,15 +607,16 @@ em { font-family: var(--serif); font-style: italic; color: var(--em, var(--accen
   .quote-bento { display: flex; flex-direction: column; height: auto; }
   .q-photo { display: none; }
   .q-feature {
-    height: 52dvh;
+    height: 50dvh;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
   }
   /* Long wishes scroll inside the tile; the play button stays pinned at its bottom edge */
   .q-voice { position: sticky; bottom: 0; background: #fff; padding-block: 0.5rem; margin-bottom: -0.5rem; }
-  .q-list { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.5rem; }
+  .q-list { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 0.5rem; padding-right: calc(1rem + 150px); }
   .q-card { flex: 0 0 auto; min-height: 48px; }
+  .panel { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ==========================================================================
